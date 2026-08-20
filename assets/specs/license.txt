@@ -1,0 +1,17 @@
+#! edify license status — no account, no phone-home
+$ edify license status
+plan      free
+source    none
+
+entitlements
+  [no ] graph.unlimited    a graph larger than 25,000 nodes
+  [no ] library.upgrade    `edify upgrade`
+  [no ] mcp.multi          more than 1 server in the registry
+  [no ] team               more than one seat
+
+graph cap     25,000 nodes
+registry cap  1 server
+
+Everything else is free, forever, with no account:
+  every command, every query, every check, the whole
+  methodology tree.

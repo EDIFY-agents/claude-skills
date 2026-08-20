@@ -1,0 +1,70 @@
+name: Graph gap — a symbol EDIFY should have found
+description: The extractor missed something, or pointed at the wrong place.
+labels: ["graph", "gap", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **These are the most valuable reports this project receives.**
+
+        The graph is mechanically extracted and never written by a model, so a
+        missing symbol is a real, fixable gap in an extractor — not a bad guess.
+        Every one of these makes the map better for everyone using that language.
+
+        Before filing, check whether the language is covered at all:
+
+        ```
+        edify doctor
+        cat .edify/graph/meta | grep -i language
+        ```
+
+        If `languages_uncovered` names your language, that is a known gap and a
+        feature request rather than a bug — but please still file it, because the
+        list of who wants what decides the order.
+
+  - type: input
+    id: symbol
+    attributes:
+      label: The symbol
+      placeholder: "createSession"
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: Where it actually is
+      placeholder: "src/auth/session.ts:48"
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: The declaration, verbatim
+      description: The few lines that declare it. This is what the extractor has to match.
+      render: text
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What went wrong
+      options:
+        - Not found at all — `edify graph where` prints nothing
+        - Found, but the file or line is wrong
+        - Found, but `dependents` misses a real caller
+        - Found, but `dependents` includes something that is not a caller
+        - A route or table was missed
+    validations:
+      required: true
+
+  - type: input
+    id: language
+    attributes:
+      label: Language and extractor backend
+      description: "`edify doctor` prints the backend — built-in scanner, Python AST, or ctags."
+      placeholder: "TypeScript · built-in scanner"
+    validations:
+      required: true

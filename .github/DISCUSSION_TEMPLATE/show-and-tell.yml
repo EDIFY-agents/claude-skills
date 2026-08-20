@@ -1,0 +1,34 @@
+title: "[Show] "
+labels: ["show-and-tell"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ran EDIFY on something real? This is where it goes. Wins and failures
+        both — a failure written down well is more useful to the next person than
+        a success.
+  - type: input
+    id: repo
+    attributes:
+      label: The codebase
+      placeholder: "~400k lines · TypeScript + Go · 9 years old"
+    validations:
+      required: true
+  - type: input
+    id: agent
+    attributes:
+      label: Agent and model
+      placeholder: "Claude Code · claude-opus-5"
+  - type: textarea
+    id: task
+    attributes:
+      label: The task
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What happened
+      description: What worked, what did not, and what you would want changed.
+    validations:
+      required: true

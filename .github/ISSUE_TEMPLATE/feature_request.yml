@@ -1,0 +1,54 @@
+name: Feature request
+description: Something EDIFY should do and does not.
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        EDIFY closes four specific failures and deliberately gets out of the way
+        of everything else — see [what EDIFY does not
+        do](https://github.com/edify-dev/edify#what-edify-does-not-do). Requests
+        that widen the product are usually declined, and the reasoning is written
+        down in
+        [`10-what-we-dropped.md`](https://github.com/edify-dev/edify/blob/main/docs/design/10-what-we-dropped.md).
+
+        That is not a discouragement. It means a request framed as **"here is the
+        real task that went wrong"** lands much better than one framed as "add
+        support for X".
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: The task that went wrong
+      description: >
+        A real thing you were doing, in a real repository, and where it broke
+        down. Not the feature — the failure that made you want it.
+    validations:
+      required: true
+
+  - type: textarea
+    id: today
+    attributes:
+      label: What you do today instead
+      description: The workaround, and what it costs you each time.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What you think EDIFY should do
+      description: If you have a shape in mind, including a command signature, put it here.
+
+  - type: checkboxes
+    id: constraints
+    attributes:
+      label: Does this fit the constraints
+      description: >
+        Not a filter — an honest answer helps triage. A request that breaks one of
+        these can still be right, and then the discussion is about the constraint.
+      options:
+        - label: It needs no new runtime dependency
+        - label: It needs no network call
+        - label: It does not require EDIFY to wrap, host, or route to a model
+        - label: It does not require a model to write anything into the graph

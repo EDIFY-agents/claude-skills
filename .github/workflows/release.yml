@@ -1,0 +1,116 @@
+name: release
+
+# Tag-driven, and the tag has to agree with the version in the package — a release
+# whose git tag and wheel disagree is one somebody has to untangle later.
+#
+# Publishing uses PyPI trusted publishing (OIDC), so there is no API token anywhere
+# in this repository. The one-time trusted-publisher setup lives in the private release runbook.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: "where to publish"
+        required: true
+        default: testpypi
+        type: choice
+        options: [testpypi, pypi]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: the tag, the package, and the manifest must all say the same version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG=$(python -c "import sys; sys.path.insert(0,'src'); import edify; print(edify.__version__)")
+          if [ "$TAG" != "$PKG" ]; then
+            echo "tag $TAG but package $PKG — bump one of them " >&2
+            exit 1
+          fi
+
+      - run: pip install build twine
+      - run: python -m build
+      - run: python -m twine check dist/*
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  # The install a stranger performs, on three machines that have never seen the
+  # source. A checkout on disk hides a packaging mistake: the asset resolver falls
+  # back to the source tree and a wheel with no methodology in it looks fine.
+  smoke:
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: install the wheel and drive it
+        shell: bash
+        run: |
+          python -m venv .venv
+          BIN=.venv/bin
+          if [ -d .venv/Scripts ]; then BIN=.venv/Scripts; fi   # Windows lays it out differently
+          "$BIN/python" -m pip install --quiet dist/*.whl
+          mkdir -p demo/src && cd demo
+          printf '[project]\nname = "demo"\ndependencies = ["fastapi"]\n' > pyproject.toml
+          printf 'def health():\n    return {"ok": True}\n' > src/app.py
+          "../$BIN/edify" init --yes
+          "../$BIN/edify" doctor
+          "../$BIN/edify" graph where health
+          "../$BIN/edify" check --exit-code
+          "../$BIN/edify" governance verify --exit-code
+
+  publish:
+    needs: smoke
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.target || 'pypi' }}
+    permissions:
+      id-token: write   # the OIDC token trusted publishing exchanges for an upload
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: ${{ (inputs.target == 'testpypi') && 'https://test.pypi.org/legacy/' || '' }}
+
+  github_release:
+    needs: publish
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+      - run: gh release create "$GITHUB_REF_NAME" dist/* --title "$GITHUB_REF_NAME" --generate-notes
+        env:
+          GH_TOKEN: ${{ github.token }}

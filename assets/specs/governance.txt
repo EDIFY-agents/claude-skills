@@ -1,0 +1,17 @@
+#! edify governance — every file EDIFY installed, and where it came from
+$ edify governance list
+path                          kind      origin     licence             source
+----------------------------  --------  ---------  ------------------  ---------------
+.edify/commands/build.md      command   shipped    FSL-1.1-Apache-2.0  edify-cli@0.1.0
+.edify/commands/spec.md       command   shipped    FSL-1.1-Apache-2.0  edify-cli@0.1.0
+.edify/conventions.md         scraped   generated  FSL-1.1-Apache-2.0  edify-cli@0.1.0
+.edify/skills/planner.md      skill     library    FSL-1.1-Apache-2.0  edify-cli@0.1.0
+.edify/mcp.md                 registry  seeded     FSL-1.1-Apache-2.0  edify-cli@0.1.0
+
+26 files · 11 shipped · 7 library · 1 scraped · 1 seeded · 6 pointers
+
+$ edify governance verify
+modified   .edify/skills/planner.md  changed since it was installed
+           (library) — `edify upgrade` will replace it
+
+1 to look at · 0 edited by this repository

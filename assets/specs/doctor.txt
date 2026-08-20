@@ -1,0 +1,13 @@
+#! edify doctor — does the install work here
+$ edify doctor
+ok        install      edify 0.1.0 · library of 12 skill entries
+degraded  extractor    built-in backend: Python is parsed exactly,
+                       everything else is scanned — install Universal
+                       Ctags for parse-grade precision on the rest
+ok        graph        1485 nodes · 2440 edges
+ok        skills       7 entries · every role resolves
+ok        governance   34 files recorded · unchanged since install
+ok        CLAUDE.md    20 lines · points at the graph
+ok        license      free
+
+amber — this works, degraded, in the places named above

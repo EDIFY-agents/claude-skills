@@ -1,0 +1,39 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.coverage
+htmlcov/
+.DS_Store
+Thumbs.db
+
+# Regenerable output. Committing it makes structural change visible in review;
+# ignoring it keeps diffs quiet. Ignored by default — flip it if you prefer.
+.edify/graph/
+
+# --------------------------------------------------------------------------
+# Belt and braces. None of these should ever exist in the public repository —
+# the licence signing key, the issuance tool, the customer ledger, the release
+# runbook, and the commercial strategy dossier live only on the private side.
+# .github/workflows/guard.yml fails the build if one arrives anyway; this stops
+# it being committed in the first place.
+# --------------------------------------------------------------------------
+tools/.keys/
+tools/.issued.tsv
+tools/issue_license.py
+PUBLISHING.md
+docs/design/11-commercial.md
+*.pem
+*_ed25519
+id_rsa*
+.env
+.env.*
+
+# A stranger's text, verbatim, awaiting a human. The permanent record of what
+# arrived and what happened to it is the ledger, not the bytes.
+harvest/staging/
+harvest/quarantine/

@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # EDIFY has no runtime dependencies, so this watches exactly one thing: the
+  # actions in our own CI. That is the whole supply chain, and it is small
+  # deliberately.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    commit-message:
+      prefix: "ci"
+    labels: ["ci", "dependencies"]
+    open-pull-requests-limit: 5

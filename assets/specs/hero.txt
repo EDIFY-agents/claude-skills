@@ -1,0 +1,19 @@
+#! the 60-second path
+$ pipx install edify-cli
+$ cd your-repository
+$ edify init --yes
+
+stack     fastapi, python
+manager   -   test runner pytest
+graph     1485 nodes · 2440 edges · 66 files
+conventions  scraped from config files · zero model calls
+skills    7 installed · 5 in the library did not match this stack
+mcp       registry seeded with one entry: the documentation server
+commands  5 installed under .edify/commands/
+CLAUDE.md written
+governance 26 files recorded — origin, licence, and hash for each
+
+Next: /spec — write the spec before anything else.
+
+# then, in Claude Code, Codex, Cursor, Gemini CLI, Copilot or Windsurf:
+#   /spec  →  /plan  →  /tasks  →  /build  →  /verify

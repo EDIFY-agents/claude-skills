@@ -1,0 +1,75 @@
+name: Benchmark reproduction
+description: You ran the benchmark and got a different result than we published.
+labels: ["benchmark", "reproduction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The benchmark claim is **same model, same repo, same task** — agent alone
+        vs Spec Kit vs EDIFY. If you cannot reproduce it, that is a defect in the
+        claim and we would rather hear it here than not hear it.
+
+        Scripts, prompts, and raw results are in
+        [`benchmarks/`](https://github.com/edify-dev/edify/tree/main/benchmarks).
+
+  - type: input
+    id: task
+    attributes:
+      label: Which task
+      placeholder: "task-04 · add pagination to the orders endpoint"
+    validations:
+      required: true
+
+  - type: input
+    id: model
+    attributes:
+      label: Model, exact version
+      description: A different model version is a different benchmark. Please pin it.
+      placeholder: "claude-opus-5"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: arm
+    attributes:
+      label: Which arm did you run
+      multiple: true
+      options:
+        - Agent alone (baseline)
+        - Spec Kit
+        - EDIFY
+    validations:
+      required: true
+
+  - type: textarea
+    id: published
+    attributes:
+      label: What we published
+      placeholder: "tasks passed 7/10 · human interventions 2 · retries 3"
+    validations:
+      required: true
+
+  - type: textarea
+    id: got
+    attributes:
+      label: What you got
+      placeholder: "tasks passed 4/10 · human interventions 6 · retries 9"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deltas
+    attributes:
+      label: Anything you changed from the published setup
+      description: >
+        Different hardware, a modified prompt, a different repo state, a
+        non-default extractor, network conditions. Say so even if you think it
+        is irrelevant — most of the time it is the answer.
+    validations:
+      required: true
+
+  - type: textarea
+    id: artifacts
+    attributes:
+      label: Raw output
+      description: Transcript, token counts, timings — a gist link is fine.

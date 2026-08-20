@@ -1,0 +1,16 @@
+#! edify check — what is wrong with the documents
+$ edify check
+specs/orders/plan.md:70: error: [plan-decision-no-version]
+    D-2 names no exact version
+    `2.3`, not `^2.3` and not `latest` — this is what the docs
+    server is pointed at
+
+specs/orders/plan.md:152: warn: [plan-seed-no-range]
+    context seed `src/auth.py` has no line range
+    a seed without a range transfers its cost to /tasks, which
+    is the reason the plan exists
+
+1 error · 1 warning · 0 notes
+
+# Nothing blocks. `edify check` prints; you or your CI decide
+# what that means. `--exit-code` is how you make it a gate you own.

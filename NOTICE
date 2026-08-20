@@ -1,0 +1,35 @@
+EDIFY
+Copyright 2026 EDIFY
+
+This product is licensed under the Functional Source License, Version 1.1,
+with an Apache 2.0 Future License (FSL-1.1-Apache-2.0). See LICENSE.
+
+Each released version converts to the Apache License, Version 2.0 on the
+second anniversary of its release date. See CHANGELOG.md for release dates.
+
+--------------------------------------------------------------------------
+THIRD-PARTY AND ADAPTED MATERIAL
+--------------------------------------------------------------------------
+
+The EDIFY command-line tool has no runtime dependencies. It runs on the
+Python standard library alone.
+
+Optional, never required:
+  tree-sitter                 MIT License
+  tree-sitter-language-pack   MIT License
+  Universal Ctags             GPL-2.0 (invoked as an external binary only;
+                              never linked, never redistributed)
+
+Skill library entries carry their own provenance and licence in frontmatter.
+An entry marked `provenance: adapted` derives from upstream material and is
+governed by the upstream licence recorded in that entry's `license:` field,
+not by this project's LICENSE. `edify governance list` prints the licence of
+every file EDIFY installs into a repository.
+
+--------------------------------------------------------------------------
+TRADEMARKS
+--------------------------------------------------------------------------
+
+"EDIFY" and the EDIFY logo are trademarks of EDIFY. The LICENSE does not
+grant permission to use them. See TRADEMARK.md for what is and is not
+allowed without asking.

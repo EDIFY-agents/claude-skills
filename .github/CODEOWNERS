@@ -1,0 +1,26 @@
+# Default: everything is reviewed by the maintainers.
+*                               @edify-dev/maintainers
+
+# Contracts. Changing one of these invalidates specs that already exist in other
+# people's repositories, so they carry a heavier review than the code that reads them.
+/edify/formats/                 @edify-dev/maintainers
+/edify/commands/                @edify-dev/maintainers
+/src/edify/formats/             @edify-dev/maintainers
+
+# Curated library entries — merged after screening, never on sight.
+/edify/skills/                  @edify-dev/maintainers
+
+# Licence, gates, and anything that decides what costs money.
+/src/edify/licensing/           @edify-dev/maintainers
+
+# Legal surface. No exceptions and no delegated review.
+/LICENSE                        @edify-dev/maintainers
+/NOTICE                         @edify-dev/maintainers
+/TRADEMARK.md                   @edify-dev/maintainers
+/GOVERNANCE.md                  @edify-dev/maintainers
+/SECURITY.md                    @edify-dev/maintainers
+/CONTRIBUTING.md                @edify-dev/maintainers
+
+# Supply chain and the guard that keeps private material out of this repository.
+/.github/workflows/             @edify-dev/maintainers
+/pyproject.toml                 @edify-dev/maintainers

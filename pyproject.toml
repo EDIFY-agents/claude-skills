@@ -1,0 +1,90 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "edify-cli"
+version = "0.1.0"
+description = "Your coding agent is fast. Make it reliable. Codebase context, a precise plan, and independent verification for every change."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "EDIFY" }]
+maintainers = [{ name = "EDIFY" }]
+keywords = [
+  "ai", "coding-agent", "claude-code", "codex", "cursor", "copilot",
+  "codebase", "graph", "spec-driven", "verification", "harness", "llm",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: Other/Proprietary License",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: Software Development :: Quality Assurance",
+  "Operating System :: OS Independent",
+]
+
+# Deliberately empty. The CLI runs on the standard library alone so it installs
+# on a locked-down build server without a procurement conversation.
+dependencies = []
+
+[project.optional-dependencies]
+# Optional, never required. Enables syntax-tree extraction for the languages the
+# built-in scanner covers by pattern instead. `edify doctor` reports which is in use.
+treesitter = ["tree-sitter>=0.23", "tree-sitter-language-pack>=0.7"]
+dev = ["pytest>=8.0"]
+
+[project.urls]
+Homepage = "https://github.com/edify-dev/edify"
+Documentation = "https://github.com/edify-dev/edify/tree/main/docs"
+Changelog = "https://github.com/edify-dev/edify/blob/main/CHANGELOG.md"
+Issues = "https://github.com/edify-dev/edify/issues"
+Discussions = "https://github.com/edify-dev/edify/discussions"
+Source = "https://github.com/edify-dev/edify"
+
+[project.scripts]
+edify = "edify.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/edify"]
+
+# The authored methodology tree lives at the repository root exactly as
+# `design/architecture/01-folder-structure.md` §1 specifies. It ships inside the
+# package as `edify/assets/` so `edify init` can install it with no network.
+[tool.hatch.build.targets.wheel.force-include]
+"edify/manifest.md" = "edify/assets/manifest.md"
+"edify/commands" = "edify/assets/commands"
+"edify/formats" = "edify/assets/formats"
+"edify/skills" = "edify/assets/skills"
+"edify/mcp" = "edify/assets/mcp"
+"edify/harvest" = "edify/assets/harvest"
+"edify/templates" = "edify/assets/templates"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "src/edify",
+  "edify",
+  "tests",
+  "docs",
+  "tools",
+  "examples",
+  "packaging",
+  "README.md",
+  "INSTALL.md",
+  "LICENSE",
+  "NOTICE",
+  "CONTRIBUTING.md",
+  "SECURITY.md",
+  "TRADEMARK.md",
+  "CHANGELOG.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

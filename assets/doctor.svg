@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="624" height="336" viewBox="0 0 624 336" role="img" aria-label="Terminal: edify doctor — does the install work here">
+<rect width="624" height="336" rx="10" fill="#0B0F17"/>
+<path d="M10 0 h604 a10 10 0 0 1 10 10 v24 h-624 v-24 a10 10 0 0 1 10 -10 z" fill="#111825"/>
+<line x1="0" y1="34" x2="624" y2="34" stroke="#1E2733" stroke-width="1"/>
+<rect x="0.5" y="0.5" width="623" height="335" rx="10" fill="none" stroke="#1E2733" stroke-width="1"/>
+<circle cx="20" cy="17.0" r="5" fill="#F85149" opacity="0.85"/>
+<circle cx="37" cy="17.0" r="5" fill="#D29922" opacity="0.85"/>
+<circle cx="54" cy="17.0" r="5" fill="#3FB950" opacity="0.85"/>
+<text x="312.0" y="21.0" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#5E6B7E" text-anchor="middle" letter-spacing="0.4">edify doctor — does the install work here</text>
+<text x="22" y="56" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" xml:space="preserve"><tspan fill="#4C8DFF">$ </tspan><tspan fill="#EEF3F8">edify doctor</tspan></text>
+<text x="22" y="78" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#3FB950" xml:space="preserve">ok        install      edify 0.1.0 · library of 12 skill entries</text>
+<text x="22" y="100" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#D29922" xml:space="preserve">degraded  extractor    built-in backend: Python is parsed exactly,</text>
+<text x="22" y="122" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#C9D4E0" xml:space="preserve">                       everything else is scanned — install Universal</text>
+<text x="22" y="144" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#C9D4E0" xml:space="preserve">                       Ctags for parse-grade precision on the rest</text>
+<text x="22" y="166" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#3FB950" xml:space="preserve">ok        graph        1485 nodes · 2440 edges</text>
+<text x="22" y="188" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#3FB950" xml:space="preserve">ok        skills       7 entries · every role resolves</text>
+<text x="22" y="210" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#3FB950" xml:space="preserve">ok        governance   34 files recorded · unchanged since install</text>
+<text x="22" y="232" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#3FB950" xml:space="preserve">ok        CLAUDE.md    20 lines · points at the graph</text>
+<text x="22" y="254" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#3FB950" xml:space="preserve">ok        license      free</text>
+<text x="22" y="276" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#C9D4E0" xml:space="preserve"></text>
+<text x="22" y="298" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="14" fill="#F85149" xml:space="preserve">amber — this works, degraded, in the places named above</text>
+</svg>

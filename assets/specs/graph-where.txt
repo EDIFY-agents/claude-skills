@@ -1,0 +1,15 @@
+#! edify graph — a map extracted from your code
+$ edify graph where is_expired
+src/auth.py:3    symbol   is_expired
+
+$ edify graph dependents create_session
+src/api.py:3     symbol   login
+src/api.py:1     file     src/api.py
+
+$ edify graph defines src/api.py
+3     symbol   login
+6     symbol   refresh
+1     module   src.api
+
+# Never written by a model. A missing symbol is a visible gap,
+# not an invented fact.

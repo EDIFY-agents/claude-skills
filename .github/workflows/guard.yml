@@ -1,0 +1,79 @@
+name: guard
+
+# This repository is the public half of a two-repository split. Some files exist
+# only on the private side — the licence signing key, the issuance tool, the
+# customer ledger, the release runbook. This job fails loudly if one of them ever
+# arrives here by way of a merge, a rebase, or a well-meaning `cp -r`.
+#
+# It is cheap, it runs on every push, and the one time it fires it will have paid
+# for every run before it.
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  no-private-material:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: files that must never exist in the public repository
+        run: |
+          fail=0
+          check() {
+            if compgen -G "$1" > /dev/null; then
+              echo "::error::private material present: $1"
+              fail=1
+            fi
+          }
+          check 'tools/issue_license.py'
+          check 'tools/.keys/*'
+          check 'tools/.issued.tsv'
+          check 'PUBLISHING.md'
+          check 'docs/design/11-commercial.md'
+          check '**/*.pem'
+          check '**/*_ed25519'
+          check 'harvest/staging/*'
+          check 'harvest/quarantine/*'
+          exit $fail
+
+      - name: no private signing key material in tracked content
+        run: |
+          if git grep -nIE 'BEGIN (OPENSSH |RSA |EC |PGP )?PRIVATE KEY' -- . ; then
+            echo "::error::a private key is committed"
+            exit 1
+          fi
+          echo "clean"
+
+      - name: the dependency list is still empty
+        run: |
+          python - <<'PY'
+          import re, sys, pathlib
+          src = pathlib.Path("pyproject.toml").read_text(encoding="utf-8")
+          m = re.search(r'^dependencies\s*=\s*\[(.*?)\]', src, re.S | re.M)
+          if m is None:
+              sys.exit("no [project] dependencies key found")
+          body = re.sub(r'#.*', '', m.group(1)).strip()
+          if body:
+              sys.exit(f"EDIFY ships with no runtime dependencies; found: {body}\n"
+                       "See CONTRIBUTING.md — 'The one hard rule'.")
+          print("dependencies = [] — unchanged")
+          PY
+
+      - name: no telemetry crept in
+        run: |
+          # Every socket-opening call site has to be one of the two commands that
+          # are allowed to have one. docs/privacy.md is a promise; this enforces it.
+          hits=$(git grep -nIE '\b(urlopen|urlretrieve|requests\.(get|post)|httpx\.|socket\.socket|http\.client)' -- src/ \
+                 | grep -vE 'src/edify/(upgrade|self_update)' \
+                 | grep -vE 'src/edify/commands/(upgrade_cmd|self_cmd)\.py' || true)
+          if [ -n "$hits" ]; then
+            echo "::error::network call outside upgrade / self update"
+            echo "$hits"
+            exit 1
+          fi
+          echo "no unexpected network call sites"

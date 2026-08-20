@@ -1,0 +1,99 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python: ["3.10", "3.13"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: pip install -e ".[dev]"
+      - run: pytest -q
+
+  # The install path a stranger takes, on a machine that has never seen the source.
+  # It is a separate job because a checkout on disk hides a packaging mistake: the
+  # asset resolver falls back to the source tree and everything looks fine.
+  #
+  # It runs on macOS as well as Linux because that is where the two install paths
+  # people actually use are — pipx and brew — and because the config directory
+  # differs there (`~/Library/Application Support`, `src/edify/paths.py`).
+  wheel:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build && python -m build
+      - name: install the wheel somewhere with no checkout in sight
+        run: |
+          mkdir -p "$RUNNER_TEMP/elsewhere" && cd "$RUNNER_TEMP/elsewhere"
+          python -m venv .venv
+          .venv/bin/pip install "$GITHUB_WORKSPACE"/dist/*.whl
+          mkdir -p demo/src && cd demo
+          printf '[project]\nname = "demo"\ndependencies = ["fastapi"]\n' > pyproject.toml
+          printf 'def health():\n    return {"ok": True}\n' > src/app.py
+          ../.venv/bin/edify init --yes
+          ../.venv/bin/edify doctor
+          ../.venv/bin/edify graph where health
+          ../.venv/bin/edify check --exit-code
+          ../.venv/bin/edify governance verify --exit-code
+
+      - name: a non-interactive run writes nothing outside the repository
+        run: |
+          cd "$RUNNER_TEMP/elsewhere/demo"
+          ../.venv/bin/edify --quiet graph stat
+          test ! -e "$HOME/Library/Application Support/edify/state"
+          test ! -e "$HOME/.config/edify/state"
+
+  # `pipx` is what INSTALL.md tells a Mac user to run, so it is what CI runs.
+  pipx:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install build pipx && python -m build
+      - run: |
+          pipx install ./dist/*.whl
+          edify version
+          edify doctor || true          # amber before `init`, which is correct
+          cd "$RUNNER_TEMP" && mkdir -p pipx-demo/src && cd pipx-demo
+          printf '[project]\nname = "demo"\n' > pyproject.toml
+          printf 'def health():\n    return 1\n' > src/app.py
+          edify init --skills planner,verifier
+          edify skills list
+          edify governance list
+          edify governance verify --exit-code
+
+  # EDIFY checks its own repository with its own binary. If the harness cannot pass
+  # what it asks of a customer's tree, it is ceremony and should be deleted rather
+  # than defended.
+  dogfood:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e .
+      - run: edify init --force --yes
+      - run: edify doctor
+      - run: edify check --exit-code
+      - run: edify governance verify --exit-code

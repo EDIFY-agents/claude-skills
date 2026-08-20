@@ -1,0 +1,13 @@
+# Normalise to LF in the repository. `text=auto` alone still hands Windows
+# checkouts CRLF, which turns a cross-platform contributor's first PR into a
+# whole-file diff. `eol=lf` keeps the working tree LF everywhere too.
+* text=auto eol=lf
+
+# Generated from assets/specs/*.txt by tools/render_terminal.py. Marking them
+# keeps a re-render out of the diff summary and out of language statistics.
+*.svg  -diff  linguist-generated=true
+
+# The methodology tree is the product, not documentation about it.
+edify/**       linguist-documentation=false
+docs/**        linguist-documentation=true
+examples/**    linguist-documentation=true

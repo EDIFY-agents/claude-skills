@@ -1,0 +1,75 @@
+name: Bug report
+description: Something EDIFY did that it should not have, with a way to reproduce it.
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. The two fields that decide how fast this gets
+        fixed are **reproduction** and **`edify doctor` output**.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you ran, and what it did.
+      placeholder: |
+        $ edify graph build
+        Traceback (most recent call last):
+        ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: >
+        The smallest repository or file that triggers it. A public repo we can
+        clone is ideal. "It happens in our monorepo" is a report we cannot act on.
+      placeholder: |
+        1. git clone https://github.com/example/repo && cd repo
+        2. edify init --yes
+        3. edify graph where SomeSymbol
+        4. → prints nothing; the symbol is on line 40 of src/thing.py
+    validations:
+      required: true
+
+  - type: textarea
+    id: doctor
+    attributes:
+      label: "`edify doctor` output"
+      description: Paste it whole, including the degraded lines.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version and install method
+      placeholder: "edify 0.1.0 · pipx · Python 3.12 · macOS 15.3 (arm64)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Which coding agent were you using
+      options:
+        - Claude Code
+        - OpenAI Codex
+        - Cursor
+        - Gemini CLI
+        - GitHub Copilot
+        - Windsurf
+        - Other / none — this is a CLI bug
+    validations:
+      required: true
