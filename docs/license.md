@@ -85,6 +85,6 @@ keep the Apache 2.0 conversion promise. Four sentences, in
 
 ## Still unsure
 
-Open a [discussion](https://github.com/edify-dev/edify/discussions) and ask. "Can we do X" questions are
+Open a [discussion](https://github.com/EDIFY-agents/edify_public/discussions) and ask. "Can we do X" questions are
 answered in public so the next person finds the answer, and the answer is almost
 always yes.

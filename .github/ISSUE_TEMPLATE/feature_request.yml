@@ -7,10 +7,10 @@ body:
       value: |
         EDIFY closes four specific failures and deliberately gets out of the way
         of everything else — see [what EDIFY does not
-        do](https://github.com/edify-dev/edify#what-edify-does-not-do). Requests
+        do](https://github.com/EDIFY-agents/edify_public#what-edify-does-not-do). Requests
         that widen the product are usually declined, and the reasoning is written
         down in
-        [`10-what-we-dropped.md`](https://github.com/edify-dev/edify/blob/main/docs/design/10-what-we-dropped.md).
+        [`10-what-we-dropped.md`](https://github.com/EDIFY-agents/edify_public/blob/main/docs/design/10-what-we-dropped.md).
 
         That is not a discouragement. It means a request framed as **"here is the
         real task that went wrong"** lands much better than one framed as "add

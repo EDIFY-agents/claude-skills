@@ -1,11 +1,11 @@
 blank_issues_enabled: false
 contact_links:
   - name: Question, idea, or "is this the right approach?"
-    url: https://github.com/edify-dev/edify/discussions
+    url: https://github.com/EDIFY-agents/edify_public/discussions
     about: Anything that is not a reproducible bug. Answered in public, next to the code.
   - name: Security vulnerability
-    url: https://github.com/edify-dev/edify/security/advisories/new
+    url: https://github.com/EDIFY-agents/edify_public/security/advisories/new
     about: Report privately. Never open a public issue for a vulnerability.
   - name: Install trouble — try this first
-    url: https://github.com/edify-dev/edify/blob/main/docs/troubleshooting.md
+    url: https://github.com/EDIFY-agents/edify_public/blob/main/docs/troubleshooting.md
     about: PATH problems, Python versions, and what `edify doctor` is telling you.

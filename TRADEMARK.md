@@ -60,6 +60,6 @@ support requests for someone else's build is not.
 
 ## Asking
 
-Open a [discussion](https://github.com/edify-dev/edify/discussions) or email **legal@edify.dev**. Requests
+Open a [discussion](https://github.com/EDIFY-agents/edify_public/discussions) or email **legal@edify.dev**. Requests
 that amount to "we want to be clear we are not you" are approved as a matter of
 routine.

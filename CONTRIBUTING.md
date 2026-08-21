@@ -47,7 +47,7 @@ in use.
 ## Development setup
 
 ```bash
-git clone https://github.com/edify-dev/edify && cd edify
+git clone https://github.com/EDIFY-agents/edify_public && cd edify_public
 pip install -e ".[dev]"
 pytest
 ```
@@ -103,8 +103,8 @@ Do not open an issue. See [SECURITY.md](SECURITY.md).
 
 ## Where conversation happens
 
-- **[Issues](https://github.com/edify-dev/edify/issues)** — reproducible bugs, install problems, graph gaps.
-- **[Discussions](https://github.com/edify-dev/edify/discussions)** — questions, ideas, benchmark
+- **[Issues](https://github.com/EDIFY-agents/edify_public/issues)** — reproducible bugs, install problems, graph gaps.
+- **[Discussions](https://github.com/EDIFY-agents/edify_public/discussions)** — questions, ideas, benchmark
   methodology, "is this the right approach", showing what you built.
 
 There is no Discord. When there is a recurring community that needs one, there

@@ -45,6 +45,20 @@ GitHub themes because the terminal is dark in either. No external image host, no
 binary blobs in history, and a wrong number is a one-line fix rather than a
 re-shoot.
 
+## The one exception: `pipeline.svg`
+
+`pipeline.svg` is the animated banner at the top of the root
+[`README.md`](../README.md). It is the **only** image here that is drawn rather
+than captured, because it shows the shape of the workflow rather than the output
+of a command — so the rule below does not apply to it and it has no transcript in
+`specs/`.
+
+It is hand-written SVG with a CSS animation on a twelve-second loop: the five
+commands light up in order as the run reaches them, then the whole thing resets.
+Edit the file directly. It carries no script, no external font, and no remote
+reference, so GitHub renders and animates it as-is, and
+`prefers-reduced-motion: reduce` gets the finished frame instead of the loop.
+
 ## The rule
 
 **Do not edit the SVGs.** Edit the transcript in `specs/` and re-render, so the
@@ -54,6 +68,7 @@ printed.
 
 | image | command |
 |---|---|
+| `pipeline.svg` | *drawn, not captured — the animated README banner* |
 | `hero.svg` | `pipx install edify-cli` · `edify init --yes` |
 | `graph-where.svg` | `edify graph where` · `dependents` · `defines` |
 | `doctor.svg` | `edify doctor` |

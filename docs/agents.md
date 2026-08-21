@@ -96,7 +96,7 @@ Features: specs/<feature>/   Skills: .edify/skills/   Servers: .edify/mcp.md
 The per-runtime knowledge is a table of "what file does it read, where do
 commands go" in [`src/edify/agents.py`](../src/edify/agents.py). Adding one is
 adding a row and a test. If your tool is missing,
-[open an issue](https://github.com/edify-dev/edify/issues/new/choose) — this is one of the easiest useful
+[open an issue](https://github.com/EDIFY-agents/edify_public/issues/new/choose) — this is one of the easiest useful
 contributions available.
 
 ## Your model contract is yours

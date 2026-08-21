@@ -131,7 +131,7 @@ command you wrote by hand — exactly where it was.
 
 ## Something else
 
-- [Discussions](https://github.com/edify-dev/edify/discussions) — questions, answered in public.
-- [Issues](https://github.com/edify-dev/edify/issues/new/choose) — with `edify doctor` output and a
+- [Discussions](https://github.com/EDIFY-agents/edify_public/discussions) — questions, answered in public.
+- [Issues](https://github.com/EDIFY-agents/edify_public/issues/new/choose) — with `edify doctor` output and a
   reproduction.
 - A **security** problem: do not open an issue. See [SECURITY.md](../SECURITY.md).

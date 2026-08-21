@@ -127,4 +127,4 @@ edify feedback
 
 Four questions, written to a file on your machine. Nothing is sent — it prints a
 `gh issue create` command and you decide. Or open a
-[discussion](https://github.com/edify-dev/edify/discussions) directly.
+[discussion](https://github.com/EDIFY-agents/edify_public/discussions) directly.

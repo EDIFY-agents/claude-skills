@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/pipeline.svg" alt="The EDIFY pipeline: /spec, /plan, /tasks, /build, /verify, running end to end" width="100%">
+
 # EDIFY
 
 ### Your coding agent is fast. Make it reliable.
@@ -10,15 +12,15 @@ change.
 
 [![PyPI](https://img.shields.io/pypi/v/edify-cli?color=4C8DFF&label=pypi)](https://pypi.org/project/edify-cli/)
 [![Python](https://img.shields.io/pypi/pyversions/edify-cli?color=4C8DFF)](https://pypi.org/project/edify-cli/)
-[![CI](https://img.shields.io/github/actions/workflow/status/edify-dev/edify/ci.yml?branch=main&label=ci)](https://github.com/edify-dev/edify/actions/workflows/ci.yml)
-[![Licence](https://img.shields.io/badge/licence-FSL--1.1--Apache--2.0-4C8DFF)](https://github.com/edify-dev/edify/blob/main/docs/license.md)
-[![Dependencies](https://img.shields.io/badge/runtime%20deps-0-3FB950)](https://github.com/edify-dev/edify/blob/main/docs/privacy.md#the-supply-chain)
-[![Telemetry](https://img.shields.io/badge/telemetry-none-3FB950)](https://github.com/edify-dev/edify/blob/main/docs/privacy.md)
+[![CI](https://img.shields.io/github/actions/workflow/status/EDIFY-agents/edify_public/ci.yml?branch=main&label=ci)](https://github.com/EDIFY-agents/edify_public/actions/workflows/ci.yml)
+[![Licence](https://img.shields.io/badge/licence-FSL--1.1--Apache--2.0-4C8DFF)](docs/license.md)
+[![Dependencies](https://img.shields.io/badge/runtime%20deps-0-3FB950)](docs/privacy.md#the-supply-chain)
+[![Telemetry](https://img.shields.io/badge/telemetry-none-3FB950)](docs/privacy.md)
 
 **Local-first · No telemetry · Works with your existing coding agent**
 
-[Quickstart](https://github.com/edify-dev/edify/blob/main/docs/quickstart.md) · [Docs](https://github.com/edify-dev/edify/blob/main/docs/) · [How it works](#how-it-works) ·
-[Benchmarks](https://github.com/edify-dev/edify/blob/main/docs/benchmarks.md) · [Pricing](https://github.com/edify-dev/edify/blob/main/docs/pricing.md)
+[Quickstart](docs/quickstart.md) · [Docs](docs/) · [How it works](#how-it-works) ·
+[Benchmarks](docs/benchmarks.md) · [Pricing](docs/pricing.md)
 
 </div>
 
@@ -37,7 +39,7 @@ to install on a build server. macOS, Linux, and Windows from the same artifact.
 
 ···  `pipx install edify-cli` · `edify init --yes`
 
-<img src="https://raw.githubusercontent.com/edify-dev/edify/main/assets/hero.svg" alt="Installing EDIFY and running edify init" width="100%">
+<img src="assets/hero.svg" alt="Installing EDIFY and running edify init" width="100%">
 
 Then, in whichever agent you already use:
 
@@ -94,7 +96,7 @@ anyone, at any time, including six months later.
 
 ···  `edify graph where` · `dependents` · `defines`
 
-<img src="https://raw.githubusercontent.com/edify-dev/edify/main/assets/graph-where.svg" alt="edify graph queries" width="100%">
+<img src="assets/graph-where.svg" alt="edify graph queries" width="100%">
 
 ```bash
 edify graph where isExpired            # → src/auth/clock.ts:12  symbol  isExpired
@@ -117,7 +119,7 @@ Python is parsed with a real syntax tree; everything else is covered by a
 declarative line scanner, or parse-grade with Universal Ctags installed. The
 metadata records which, so a scan is never mistaken for a parse.
 
-→ [docs/graph.md](https://github.com/edify-dev/edify/blob/main/docs/graph.md)
+→ [docs/graph.md](docs/graph.md)
 
 ---
 
@@ -141,7 +143,7 @@ edify init new .          # set a folder up for every runtime at once
 One methodology in one place, with thin pointers under each runtime's own command
 directory — so `/spec` resolves in whichever tool you are typing into.
 
-→ [docs/agents.md](https://github.com/edify-dev/edify/blob/main/docs/agents.md)
+→ [docs/agents.md](docs/agents.md)
 
 ---
 
@@ -159,13 +161,13 @@ anyone can watch instead of a claim anyone has to trust.
 
 ···  `edify check`
 
-<img src="https://raw.githubusercontent.com/edify-dev/edify/main/assets/verify.svg" alt="edify check output" width="100%">
+<img src="assets/verify.svg" alt="edify check output" width="100%">
 
 **Nothing blocks.** `edify check` prints; a person or a CI job decides what that
 means. If you want a hard gate, that is `edify check --exit-code` in your own CI,
 owned by you — and we say so rather than implying we ship one.
 
-→ [docs/verification.md](https://github.com/edify-dev/edify/blob/main/docs/verification.md)
+→ [docs/verification.md](docs/verification.md)
 
 ---
 
@@ -186,7 +188,7 @@ owned by you — and we say so rather than implying we ship one.
 > benchmark filled in before the benchmark ran is the fastest way to lose a
 > technical audience.
 
-→ [docs/benchmarks.md](https://github.com/edify-dev/edify/blob/main/docs/benchmarks.md) — methodology, baselines, and how to
+→ [docs/benchmarks.md](docs/benchmarks.md) — methodology, baselines, and how to
 reproduce it
 
 ---
@@ -210,7 +212,7 @@ grep -rnE '(urlopen|requests\.|httpx\.|socket\.socket)' src/
 - Feedback works the other way round: `edify feedback` writes a file on your
   machine and prints the command *you* run to send it.
 
-→ [docs/privacy.md](https://github.com/edify-dev/edify/blob/main/docs/privacy.md)
+→ [docs/privacy.md](docs/privacy.md)
 
 ---
 
@@ -221,7 +223,7 @@ moment it landed.
 
 ···  `edify governance list` · `verify`
 
-<img src="https://raw.githubusercontent.com/edify-dev/edify/main/assets/governance.svg" alt="edify governance output" width="100%">
+<img src="assets/governance.svg" alt="edify governance output" width="100%">
 
 A control counts as governance if a person can look at it and tell whether the
 work complied. A hash and a filename qualify; a promise does not.
@@ -267,12 +269,12 @@ whole methodology tree. Not a trial, and it does not expire.
 
 ···  `edify license status`
 
-<img src="https://raw.githubusercontent.com/edify-dev/edify/main/assets/license.svg" alt="edify license status" width="100%">
+<img src="assets/license.svg" alt="edify license status" width="100%">
 
 Five gates and only five, all in one readable file. The licence is a signed token
 verified locally with no phone-home.
 
-→ [docs/pricing.md](https://github.com/edify-dev/edify/blob/main/docs/pricing.md)
+→ [docs/pricing.md](docs/pricing.md)
 
 ---
 
@@ -293,24 +295,24 @@ fitting in the context window.
 
 | | |
 |---|---|
-| [Quickstart](https://github.com/edify-dev/edify/blob/main/docs/quickstart.md) | install → `init` → one real task |
-| [CLI reference](https://github.com/edify-dev/edify/blob/main/docs/cli.md) | every command, with real output |
-| [The codebase graph](https://github.com/edify-dev/edify/blob/main/docs/graph.md) | coverage, honestly stated |
-| [Verification](https://github.com/edify-dev/edify/blob/main/docs/verification.md) | evidence over assertion |
-| [Works with your agent](https://github.com/edify-dev/edify/blob/main/docs/agents.md) | six runtimes, one methodology |
-| [Privacy](https://github.com/edify-dev/edify/blob/main/docs/privacy.md) | no telemetry, and how to check |
-| [Benchmarks](https://github.com/edify-dev/edify/blob/main/docs/benchmarks.md) | methodology, in public |
-| [Pricing](https://github.com/edify-dev/edify/blob/main/docs/pricing.md) | five gates, and why each exists |
-| [Troubleshooting](https://github.com/edify-dev/edify/blob/main/docs/troubleshooting.md) | what `edify doctor` is telling you |
-| [FAQ](https://github.com/edify-dev/edify/blob/main/docs/faq.md) | the questions people ask first |
-| [**Design dossier**](https://github.com/edify-dev/edify/blob/main/docs/design/) | the reasoning — including [every cut and what it cost](https://github.com/edify-dev/edify/blob/main/docs/design/10-what-we-dropped.md) |
+| [Quickstart](docs/quickstart.md) | install → `init` → one real task |
+| [CLI reference](docs/cli.md) | every command, with real output |
+| [The codebase graph](docs/graph.md) | coverage, honestly stated |
+| [Verification](docs/verification.md) | evidence over assertion |
+| [Works with your agent](docs/agents.md) | six runtimes, one methodology |
+| [Privacy](docs/privacy.md) | no telemetry, and how to check |
+| [Benchmarks](docs/benchmarks.md) | methodology, in public |
+| [Pricing](docs/pricing.md) | five gates, and why each exists |
+| [Troubleshooting](docs/troubleshooting.md) | what `edify doctor` is telling you |
+| [FAQ](docs/faq.md) | the questions people ask first |
+| [**Design dossier**](docs/design/) | the reasoning — including [every cut and what it cost](docs/design/10-what-we-dropped.md) |
 
 ---
 
 ## Development
 
 ```bash
-git clone https://github.com/edify-dev/edify && cd edify
+git clone https://github.com/EDIFY-agents/edify_public && cd edify_public
 pip install -e ".[dev]"
 pytest
 ```
@@ -324,23 +326,23 @@ worked example parsing against the format it calibrates.
 ## Contributing
 
 The fastest useful contribution is **running EDIFY on one real task and telling
-us what broke** — `edify feedback`, or an [issue](https://github.com/edify-dev/edify/issues/new/choose). A
-[graph gap](https://github.com/edify-dev/edify/issues/new?template=graph_gap.yml) report is the single most
+us what broke** — `edify feedback`, or an [issue](https://github.com/EDIFY-agents/edify_public/issues/new/choose). A
+[graph gap](https://github.com/EDIFY-agents/edify_public/issues/new?template=graph_gap.yml) report is the single most
 valuable thing we receive.
 
-[CONTRIBUTING.md](https://github.com/edify-dev/edify/blob/main/CONTRIBUTING.md) · [GOVERNANCE.md](https://github.com/edify-dev/edify/blob/main/GOVERNANCE.md) ·
-[SECURITY.md](https://github.com/edify-dev/edify/blob/main/SECURITY.md) · [CODE_OF_CONDUCT.md](https://github.com/edify-dev/edify/blob/main/CODE_OF_CONDUCT.md) ·
-[CHANGELOG.md](https://github.com/edify-dev/edify/blob/main/CHANGELOG.md)
+[CONTRIBUTING.md](CONTRIBUTING.md) · [GOVERNANCE.md](GOVERNANCE.md) ·
+[SECURITY.md](SECURITY.md) · [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) ·
+[CHANGELOG.md](CHANGELOG.md)
 
-Questions and ideas go to [Discussions](https://github.com/edify-dev/edify/discussions); reproducible bugs go
-to [Issues](https://github.com/edify-dev/edify/issues). There is no Discord yet — when there is a recurring
+Questions and ideas go to [Discussions](https://github.com/EDIFY-agents/edify_public/discussions); reproducible bugs go
+to [Issues](https://github.com/EDIFY-agents/edify_public/issues). There is no Discord yet — when there is a recurring
 community that needs one, there will be.
 
 ---
 
 ## Licence
 
-[**FSL-1.1-Apache-2.0**](https://github.com/edify-dev/edify/blob/main/LICENSE) — the Functional Source License.
+[**FSL-1.1-Apache-2.0**](LICENSE) — the Functional Source License.
 
 Free for **any** use except building a competing product: use it at work, on
 commercial code, in production, at any company size; read it, modify it, fork it,
@@ -348,7 +350,7 @@ self-host it. **Every released version becomes Apache 2.0 two years after
 release**, irrevocably.
 
 It is source-available, not OSI open source, and we will not claim otherwise.
-Two-minute plain-English version: [docs/license.md](https://github.com/edify-dev/edify/blob/main/docs/license.md).
+Two-minute plain-English version: [docs/license.md](docs/license.md).
 
-The name is a separate grant — see [TRADEMARK.md](https://github.com/edify-dev/edify/blob/main/TRADEMARK.md). Fork freely;
+The name is a separate grant — see [TRADEMARK.md](TRADEMARK.md). Fork freely;
 rename before you ship.

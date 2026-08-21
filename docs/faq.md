@@ -126,5 +126,5 @@ and the graph is documented checksummed TSV any tool can read.
 ### How do I help?
 
 Run it on one real task and tell us what broke — `edify feedback`, or an
-[issue](https://github.com/edify-dev/edify/issues/new/choose). A [graph gap](../.github/ISSUE_TEMPLATE/graph_gap.yml)
+[issue](https://github.com/EDIFY-agents/edify_public/issues/new/choose). A [graph gap](../.github/ISSUE_TEMPLATE/graph_gap.yml)
 report is the single most valuable thing we receive.

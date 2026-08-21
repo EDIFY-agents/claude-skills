@@ -1,6 +1,6 @@
 # The Homebrew formula, kept here so it is reviewed with the code it installs.
 #
-# It is published by copying this file to `edify-dev/homebrew-tap` as
+# It is published by copying this file to `EDIFY-agents/homebrew-tap` as
 # `Formula/edify.rb` with `url` and `sha256` pointed at the release being shipped.
 # The release runbook has the two commands that produce both values.
 #
@@ -12,7 +12,7 @@ class Edify < Formula
   include Language::Python::Virtualenv
 
   desc "Your coding agent is fast. Make it reliable"
-  homepage "https://github.com/edify-dev/edify"
+  homepage "https://github.com/EDIFY-agents/edify_public"
   url "https://files.pythonhosted.org/packages/source/e/edify-cli/edify_cli-0.1.0.tar.gz"
   sha256 "0000000000000000000000000000000000000000000000000000000000000000"
   license :cannot_represent   # FSL-1.1-Apache-2.0 — source-available, no SPDX id

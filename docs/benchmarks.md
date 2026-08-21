@@ -79,5 +79,5 @@ Stated here rather than discovered later:
 ## Help us build it
 
 Benchmark methodology is the best thing to argue about in
-[Discussions](https://github.com/edify-dev/edify/discussions) right now — before the runs, while the argument
+[Discussions](https://github.com/EDIFY-agents/edify_public/discussions) right now — before the runs, while the argument
 can still change the design.

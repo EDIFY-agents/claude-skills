@@ -27,7 +27,7 @@ steering committee is telling you something false on its first page.
 ## How decisions get made in public
 
 Anything that changes behaviour a user depends on goes through a
-[discussion](https://github.com/edify-dev/edify/discussions) before it goes through a PR. The reasoning is
+[discussion](https://github.com/EDIFY-agents/edify_public/discussions) before it goes through a PR. The reasoning is
 written down in [`docs/design/`](docs/design/), which is the actual source of
 truth for this project — including
 [`10-what-we-dropped.md`](docs/design/10-what-we-dropped.md), which is the

@@ -39,8 +39,8 @@ from .ui import Out
 # opinion, and asking at that point is a pop-up rather than a question.
 INVITE_AFTER_RUNS = 3
 
-ISSUES_URL = "https://github.com/edify-dev/edify/issues/new"
-REPO = "edify-dev/edify"
+ISSUES_URL = "https://github.com/EDIFY-agents/edify_public/issues/new"
+REPO = "EDIFY-agents/edify_public"
 
 QUESTIONS = (
     ("doing", "  What were you using EDIFY for?"),

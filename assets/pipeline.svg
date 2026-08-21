@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="260" viewBox="0 0 1000 260" role="img" aria-label="The EDIFY pipeline: /spec, /plan, /tasks, /build, /verify, running end to end">
+<title>The EDIFY pipeline running end to end</title>
+<desc>/spec produces spec.md, /plan produces plan.md, /tasks produces tasks.md, /build produces the diff, and /verify produces verification.md.</desc>
+
+<defs>
+  <linearGradient id="run" x1="86" y1="0" x2="914" y2="0" gradientUnits="userSpaceOnUse">
+    <stop offset="0" stop-color="#4C8DFF"/>
+    <stop offset="0.72" stop-color="#4C8DFF"/>
+    <stop offset="1" stop-color="#3FB950"/>
+  </linearGradient>
+  <filter id="glow" x="-70%" y="-70%" width="240%" height="240%">
+    <feGaussianBlur stdDeviation="3.5" result="b"/>
+    <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+
+<style>
+  .mono { font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace; }
+
+  /* One 12s cycle. Every stage lights when the run reaches it, and the whole
+     thing resets — the same five commands, on every feature, forever. */
+  @keyframes on0 { 0%,3.2%{opacity:0} 4.6%,88%{opacity:1} 94%,100%{opacity:0} }
+  @keyframes on1 { 0%,16.5%{opacity:0} 17.9%,88%{opacity:1} 94%,100%{opacity:0} }
+  @keyframes on2 { 0%,29.8%{opacity:0} 31.2%,88%{opacity:1} 94%,100%{opacity:0} }
+  @keyframes on3 { 0%,43.1%{opacity:0} 44.5%,88%{opacity:1} 94%,100%{opacity:0} }
+  @keyframes on4 { 0%,56.5%{opacity:0} 57.9%,88%{opacity:1} 94%,100%{opacity:0} }
+
+  @keyframes runline {
+    0%,3.3%    { stroke-dashoffset: 828; opacity: 1 }
+    63.3%,88%  { stroke-dashoffset: 0;   opacity: 1 }
+    94%        { stroke-dashoffset: 0;   opacity: 0 }
+    94.1%,100% { stroke-dashoffset: 828; opacity: 0 }
+  }
+  @keyframes head {
+    0%,3.3%    { transform: translateX(0px);   opacity: 0 }
+    4.6%       { transform: translateX(18px);  opacity: 1 }
+    63.3%,88%  { transform: translateX(828px); opacity: 1 }
+    94%        { transform: translateX(828px); opacity: 0 }
+    94.1%,100% { transform: translateX(0px);   opacity: 0 }
+  }
+  @keyframes blink { 0%,48%{opacity:1} 49%,100%{opacity:0} }
+
+  .lit  { opacity: 0; animation: 12s linear infinite }
+  .s0   { animation-name: on0 }
+  .s1   { animation-name: on1 }
+  .s2   { animation-name: on2 }
+  .s3   { animation-name: on3 }
+  .s4   { animation-name: on4 }
+
+  .track-run { stroke-dasharray: 828; animation: runline 12s linear infinite }
+  .head      { animation: head 12s linear infinite }
+  .cursor    { animation: blink 1.1s steps(1) infinite }
+
+  /* Anyone who asked their system for less motion gets the finished state. */
+  @media (prefers-reduced-motion: reduce) {
+    .lit, .track-run, .head, .cursor { animation: none; opacity: 1 }
+    .track-run { stroke-dashoffset: 0 }
+    .head { transform: translateX(828px) }
+  }
+</style>
+
+<!-- terminal chrome, dark on either GitHub theme -->
+<rect width="1000" height="260" rx="12" fill="#0B0F17"/>
+<path d="M12 0 h976 a12 12 0 0 1 12 12 v26 h-1000 v-26 a12 12 0 0 1 12 -12 z" fill="#111825"/>
+<line x1="0" y1="38" x2="1000" y2="38" stroke="#1E2733" stroke-width="1"/>
+<rect x="0.5" y="0.5" width="999" height="259" rx="12" fill="none" stroke="#1E2733" stroke-width="1"/>
+<circle cx="22" cy="19" r="5.5" fill="#F85149" opacity="0.85"/>
+<circle cx="40" cy="19" r="5.5" fill="#D29922" opacity="0.85"/>
+<circle cx="58" cy="19" r="5.5" fill="#3FB950" opacity="0.85"/>
+<text class="mono" x="500" y="23.5" font-size="12" fill="#5E6B7E" text-anchor="middle" letter-spacing="0.4">edify · think hard once, then build without thinking</text>
+
+<!-- the connectors, drawn under the stages -->
+<g stroke="#1E2733" stroke-width="2" stroke-linecap="round">
+  <line x1="230" y1="96" x2="254" y2="96"/>
+  <line x1="402" y1="96" x2="426" y2="96"/>
+  <line x1="574" y1="96" x2="598" y2="96"/>
+  <line x1="746" y1="96" x2="770" y2="96"/>
+</g>
+
+<!-- /spec -->
+<g>
+  <rect x="86" y="76" width="140" height="40" rx="8" fill="#111825" stroke="#1E2733"/>
+  <rect class="lit s0" x="86" y="76" width="140" height="40" rx="8" fill="#0E1B33" stroke="#4C8DFF"/>
+  <text class="mono" x="156" y="101.5" font-size="15" fill="#6B7A8D" text-anchor="middle">/spec</text>
+  <text class="mono lit s0" x="156" y="101.5" font-size="15" fill="#EEF3F8" text-anchor="middle">/spec</text>
+  <text class="mono lit s0" x="156" y="141" font-size="11.5" fill="#5E6B7E" text-anchor="middle">spec.md</text>
+</g>
+
+<!-- /plan -->
+<g>
+  <rect x="258" y="76" width="140" height="40" rx="8" fill="#111825" stroke="#1E2733"/>
+  <rect class="lit s1" x="258" y="76" width="140" height="40" rx="8" fill="#0E1B33" stroke="#4C8DFF"/>
+  <text class="mono" x="328" y="101.5" font-size="15" fill="#6B7A8D" text-anchor="middle">/plan</text>
+  <text class="mono lit s1" x="328" y="101.5" font-size="15" fill="#EEF3F8" text-anchor="middle">/plan</text>
+  <text class="mono lit s1" x="328" y="141" font-size="11.5" fill="#5E6B7E" text-anchor="middle">plan.md</text>
+</g>
+
+<!-- /tasks -->
+<g>
+  <rect x="430" y="76" width="140" height="40" rx="8" fill="#111825" stroke="#1E2733"/>
+  <rect class="lit s2" x="430" y="76" width="140" height="40" rx="8" fill="#0E1B33" stroke="#4C8DFF"/>
+  <text class="mono" x="500" y="101.5" font-size="15" fill="#6B7A8D" text-anchor="middle">/tasks</text>
+  <text class="mono lit s2" x="500" y="101.5" font-size="15" fill="#EEF3F8" text-anchor="middle">/tasks</text>
+  <text class="mono lit s2" x="500" y="141" font-size="11.5" fill="#5E6B7E" text-anchor="middle">tasks.md</text>
+</g>
+
+<!-- /build -->
+<g>
+  <rect x="602" y="76" width="140" height="40" rx="8" fill="#111825" stroke="#1E2733"/>
+  <rect class="lit s3" x="602" y="76" width="140" height="40" rx="8" fill="#0E1B33" stroke="#4C8DFF"/>
+  <text class="mono" x="672" y="101.5" font-size="15" fill="#6B7A8D" text-anchor="middle">/build</text>
+  <text class="mono lit s3" x="672" y="101.5" font-size="15" fill="#EEF3F8" text-anchor="middle">/build</text>
+  <text class="mono lit s3" x="672" y="141" font-size="11.5" fill="#5E6B7E" text-anchor="middle">a green diff</text>
+</g>
+
+<!-- /verify — the one that ends in evidence, so it lands green -->
+<g>
+  <rect x="774" y="76" width="140" height="40" rx="8" fill="#111825" stroke="#1E2733"/>
+  <rect class="lit s4" x="774" y="76" width="140" height="40" rx="8" fill="#0D2015" stroke="#3FB950"/>
+  <text class="mono" x="844" y="101.5" font-size="15" fill="#6B7A8D" text-anchor="middle">/verify</text>
+  <text class="mono lit s4" x="844" y="101.5" font-size="15" fill="#EEF3F8" text-anchor="middle">/verify</text>
+  <text class="mono lit s4" x="844" y="141" font-size="11.5" fill="#3FB950" text-anchor="middle">verification.md</text>
+</g>
+
+<!-- the run itself -->
+<line x1="86" y1="180" x2="914" y2="180" stroke="#1E2733" stroke-width="3" stroke-linecap="round"/>
+<line class="track-run" x1="86" y1="180" x2="914" y2="180" stroke="url(#run)" stroke-width="3" stroke-linecap="round"/>
+<g class="head">
+  <circle cx="86" cy="180" r="4.5" fill="#8FBBFF" filter="url(#glow)"/>
+</g>
+
+<text class="mono" x="86" y="224" font-size="12" fill="#5E6B7E">local-first · no telemetry · works with the agent you already use</text>
+<rect class="cursor" x="556" y="214" width="7" height="13" fill="#4C8DFF"/>
+<text class="mono" x="914" y="224" font-size="12" fill="#5E6B7E" text-anchor="end">python 3.10+ · zero runtime dependencies</text>
+</svg>

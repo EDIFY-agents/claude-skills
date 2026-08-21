@@ -33,7 +33,7 @@ uv tool install edify-cli
 ### With Homebrew directly
 
 ```bash
-brew install edify-dev/tap/edify
+brew install EDIFY-agents/tap/edify
 ```
 
 The tap is published from this repository's `packaging/homebrew/edify.rb`. It
@@ -155,8 +155,8 @@ nothing is asked and no profile is written.
 ## Installing from a checkout
 
 ```bash
-git clone https://github.com/edify-dev/edify
-cd edify
+git clone https://github.com/EDIFY-agents/edify_public
+cd edify_public
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 pytest -q

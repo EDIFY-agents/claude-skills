@@ -9,8 +9,9 @@ body:
         vs Spec Kit vs EDIFY. If you cannot reproduce it, that is a defect in the
         claim and we would rather hear it here than not hear it.
 
-        Scripts, prompts, and raw results are in
-        [`benchmarks/`](https://github.com/edify-dev/edify/tree/main/benchmarks).
+        The methodology, the baselines, and how to re-run it are in
+        [`docs/benchmarks.md`](https://github.com/EDIFY-agents/edify_public/blob/main/docs/benchmarks.md).
+        Scripts, prompts, and raw results land in `benchmarks/` with the runs.
 
   - type: input
     id: task

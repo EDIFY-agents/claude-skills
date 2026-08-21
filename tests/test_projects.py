@@ -130,16 +130,16 @@ def test_a_folder_with_no_remote_is_keyed_on_its_path(tmp_path: Path) -> None:
 @pytest.mark.parametrize(
     "url",
     [
-        "https://github.com/edify-dev/edify.git",
-        "https://github.com/edify-dev/edify",
-        "git@github.com:edify-dev/edify.git",
-        "ssh://git@github.com/edify-dev/edify.git",
-        "https://github.com/edify-dev/edify/",
+        "https://github.com/EDIFY-agents/edify_public.git",
+        "https://github.com/EDIFY-agents/edify_public",
+        "git@github.com:EDIFY-agents/edify_public.git",
+        "ssh://git@github.com/EDIFY-agents/edify_public.git",
+        "https://github.com/EDIFY-agents/edify_public/",
     ],
 )
 def test_every_way_of_writing_one_remote_is_one_project(url: str) -> None:
     """Cloning over SSH after cloning over HTTPS must not cost a slot."""
-    assert projects._normalise_remote(url) == "github.com/edify-dev/edify"
+    assert projects._normalise_remote(url) == "github.com/edify-agents/edify_public"
 
 
 def test_two_checkouts_of_one_repository_share_a_slot(tmp_path: Path) -> None:

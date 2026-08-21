@@ -41,12 +41,12 @@ treesitter = ["tree-sitter>=0.23", "tree-sitter-language-pack>=0.7"]
 dev = ["pytest>=8.0"]
 
 [project.urls]
-Homepage = "https://github.com/edify-dev/edify"
-Documentation = "https://github.com/edify-dev/edify/tree/main/docs"
-Changelog = "https://github.com/edify-dev/edify/blob/main/CHANGELOG.md"
-Issues = "https://github.com/edify-dev/edify/issues"
-Discussions = "https://github.com/edify-dev/edify/discussions"
-Source = "https://github.com/edify-dev/edify"
+Homepage = "https://github.com/EDIFY-agents/edify_public"
+Documentation = "https://github.com/EDIFY-agents/edify_public/tree/main/docs"
+Changelog = "https://github.com/EDIFY-agents/edify_public/blob/main/CHANGELOG.md"
+Issues = "https://github.com/EDIFY-agents/edify_public/issues"
+Discussions = "https://github.com/EDIFY-agents/edify_public/discussions"
+Source = "https://github.com/EDIFY-agents/edify_public"
 
 [project.scripts]
 edify = "edify.cli:main"

@@ -5,7 +5,7 @@
 **Do not open a public issue.**
 
 Use GitHub's [private vulnerability
-reporting](https://github.com/edify-dev/edify/security/advisories/new), or email **security@edify.dev**.
+reporting](https://github.com/EDIFY-agents/edify_public/security/advisories/new), or email **security@edify.dev**.
 
 Include what you would want to receive: the version (`edify self where`), the
 platform, a reproduction, and what an attacker gets out of it.
