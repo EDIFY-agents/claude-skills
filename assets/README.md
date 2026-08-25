@@ -45,19 +45,29 @@ GitHub themes because the terminal is dark in either. No external image host, no
 binary blobs in history, and a wrong number is a one-line fix rather than a
 re-shoot.
 
-## The one exception: `pipeline.svg`
+## The two exceptions: `pipeline.svg` and `infinity.svg`
 
-`pipeline.svg` is the animated banner at the top of the root
-[`README.md`](../README.md). It is the **only** image here that is drawn rather
-than captured, because it shows the shape of the workflow rather than the output
-of a command — so the rule below does not apply to it and it has no transcript in
-`specs/`.
+Both are animated banners in the root [`README.md`](../README.md), and both show
+a shape rather than the output of a command — so the rule below does not apply to
+either and neither has a transcript in `specs/`. Like every other image here,
+they carry no script, no external font, and no remote reference, so GitHub
+renders and animates them as-is, and `prefers-reduced-motion: reduce` gets a
+still frame instead of a loop.
 
-It is hand-written SVG with a CSS animation on a twelve-second loop: the five
-commands light up in order as the run reaches them, then the whole thing resets.
-Edit the file directly. It carries no script, no external font, and no remote
-reference, so GitHub renders and animates it as-is, and
-`prefers-reduced-motion: reduce` gets the finished frame instead of the loop.
+`pipeline.svg` sits under the promise and shows the workflow: hand-written SVG
+with a CSS animation on a twelve-second loop, the five commands lighting up in
+order as the run reaches them, then resetting. **Edit the file directly.**
+
+`infinity.svg` opens the page and is the animation `edify init` paints in the
+terminal while it works. **Do not edit it by hand** — it is generated, and the
+lattice of dots is exactly the grid cells `src/edify/anim.py` lights up, imported
+from the module itself rather than redrawn, so the curve in the README and the
+curve in the terminal cannot drift apart. Regenerate after any change to `anim`'s
+geometry:
+
+```bash
+python tools/render_infinity.py assets/infinity.svg
+```
 
 ## The rule
 
@@ -68,7 +78,8 @@ printed.
 
 | image | command |
 |---|---|
-| `pipeline.svg` | *drawn, not captured — the animated README banner* |
+| `infinity.svg` | *generated from `edify.anim` — the animated README header* |
+| `pipeline.svg` | *drawn, not captured — the animated workflow banner* |
 | `hero.svg` | `pipx install edify-cli` · `edify init --yes` |
 | `graph-where.svg` | `edify graph where` · `dependents` · `defines` |
 | `doctor.svg` | `edify doctor` |

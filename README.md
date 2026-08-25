@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/pipeline.svg" alt="The EDIFY pipeline: /spec, /plan, /tasks, /build, /verify, running end to end" width="100%">
+<img src="assets/infinity.svg" width="560" alt="An infinity traced dot by dot — the animation the EDIFY CLI paints while it works">
 
 # EDIFY
 
@@ -9,6 +9,8 @@
 EDIFY gives Claude Code, Codex, Cursor and other agents the right codebase
 context, a precise implementation plan, and independent verification for every
 change.
+
+<img src="assets/pipeline.svg" alt="The EDIFY pipeline: /spec, /plan, /tasks, /build, /verify, running end to end" width="100%">
 
 [![PyPI](https://img.shields.io/pypi/v/edify-cli?color=4C8DFF&label=pypi)](https://pypi.org/project/edify-cli/)
 [![Python](https://img.shields.io/pypi/pyversions/edify-cli?color=4C8DFF)](https://pypi.org/project/edify-cli/)

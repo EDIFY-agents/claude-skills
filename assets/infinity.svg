@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="560" height="212" viewBox="0 0 560 212" role="img" aria-label="EDIFY: an infinity traced dot by dot, the animation the CLI paints while it works">
+<title>EDIFY: an infinity traced dot by dot, the animation the CLI paints while it works</title>
+<style>.still{display:none}@media (prefers-reduced-motion: reduce){.motion{display:none}.still{display:inline}}</style>
+<defs>
+<path id="curve" d="M520.0 100.0L519.9 96.2L519.6 92.5L519.1 88.7L518.4 85.1L517.6 81.4L516.5 77.8L515.2 74.3L513.8 70.9L512.1 67.5L510.3 64.3L508.3 61.2L506.0 58.2L503.6 55.4L501.1 52.7L498.3 50.1L495.4 47.7L492.3 45.5L489.0 43.5L485.5 41.6L481.9 40.0L478.1 38.5L474.2 37.2L470.1 36.2L465.8 35.3L461.4 34.7L456.8 34.2L452.1 34.0L447.3 34.0L442.3 34.2L437.2 34.7L431.9 35.3L426.6 36.2L421.1 37.2L415.5 38.5L409.8 40.0L403.9 41.6L398.0 43.5L392.0 45.5L385.9 47.7L379.7 50.1L373.4 52.7L367.1 55.4L360.7 58.2L354.2 61.2L347.6 64.3L341.0 67.5L334.4 70.9L327.7 74.3L320.9 77.8L314.2 81.4L307.4 85.1L300.5 88.7L293.7 92.5L286.9 96.2L280.0 100.0L273.1 103.8L266.3 107.5L259.5 111.3L252.6 114.9L245.8 118.6L239.1 122.2L232.3 125.7L225.6 129.1L219.0 132.5L212.4 135.7L205.8 138.8L199.3 141.8L192.9 144.6L186.6 147.3L180.3 149.9L174.1 152.3L168.0 154.5L162.0 156.5L156.1 158.4L150.2 160.0L144.5 161.5L138.9 162.8L133.4 163.8L128.1 164.7L122.8 165.3L117.7 165.8L112.7 166.0L107.9 166.0L103.2 165.8L98.6 165.3L94.2 164.7L89.9 163.8L85.8 162.8L81.9 161.5L78.1 160.0L74.5 158.4L71.0 156.5L67.7 154.5L64.6 152.3L61.7 149.9L58.9 147.3L56.4 144.6L54.0 141.8L51.7 138.8L49.7 135.7L47.9 132.5L46.2 129.1L44.8 125.7L43.5 122.2L42.4 118.6L41.6 114.9L40.9 111.3L40.4 107.5L40.1 103.8L40.0 100.0L40.1 96.2L40.4 92.5L40.9 88.7L41.6 85.1L42.4 81.4L43.5 77.8L44.8 74.3L46.2 70.9L47.9 67.5L49.7 64.3L51.7 61.2L54.0 58.2L56.4 55.4L58.9 52.7L61.7 50.1L64.6 47.7L67.7 45.5L71.0 43.5L74.5 41.6L78.1 40.0L81.9 38.5L85.8 37.2L89.9 36.2L94.2 35.3L98.6 34.7L103.2 34.2L107.9 34.0L112.7 34.0L117.7 34.2L122.8 34.7L128.1 35.3L133.4 36.2L138.9 37.2L144.5 38.5L150.2 40.0L156.1 41.6L162.0 43.5L168.0 45.5L174.1 47.7L180.3 50.1L186.6 52.7L192.9 55.4L199.3 58.2L205.8 61.2L212.4 64.3L219.0 67.5L225.6 70.9L232.3 74.3L239.1 77.8L245.8 81.4L252.6 85.1L259.5 88.7L266.3 92.5L273.1 96.2L280.0 100.0L286.9 103.8L293.7 107.5L300.5 111.3L307.4 114.9L314.2 118.6L320.9 122.2L327.7 125.7L334.4 129.1L341.0 132.5L347.6 135.7L354.2 138.8L360.7 141.8L367.1 144.6L373.4 147.3L379.7 149.9L385.9 152.3L392.0 154.5L398.0 156.5L403.9 158.4L409.8 160.0L415.5 161.5L421.1 162.8L426.6 163.8L431.9 164.7L437.2 165.3L442.3 165.8L447.3 166.0L452.1 166.0L456.8 165.8L461.4 165.3L465.8 164.7L470.1 163.8L474.2 162.8L478.1 161.5L481.9 160.0L485.5 158.4L489.0 156.5L492.3 154.5L495.4 152.3L498.3 149.9L501.1 147.3L503.6 144.6L506.0 141.8L508.3 138.8L510.3 135.7L512.1 132.5L513.8 129.1L515.2 125.7L516.5 122.2L517.6 118.6L518.4 114.9L519.1 111.3L519.6 107.5L519.9 103.8Z"/>
+<filter id="glow" x="-200%" y="-200%" width="500%" height="500%">
+<feGaussianBlur stdDeviation="3.4" result="b"/>
+<feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+</defs>
+<rect width="560" height="212" rx="10" fill="#0B0F17"/>
+<rect x="0.5" y="0.5" width="559" height="211" rx="10" fill="none" stroke="#1E2733" stroke-width="1"/>
+<g fill="#2E3E5C">
+<circle cx="520" cy="100" r="1.9"/>
+<circle cx="520" cy="78" r="1.9"/>
+<circle cx="504" cy="78" r="1.9"/>
+<circle cx="504" cy="56" r="1.9"/>
+<circle cx="488" cy="56" r="1.9"/>
+<circle cx="488" cy="34" r="1.9"/>
+<circle cx="472" cy="34" r="1.9"/>
+<circle cx="456" cy="34" r="1.9"/>
+<circle cx="440" cy="34" r="1.9"/>
+<circle cx="424" cy="34" r="1.9"/>
+<circle cx="408" cy="34" r="1.9"/>
+<circle cx="392" cy="34" r="1.9"/>
+<circle cx="392" cy="56" r="1.9"/>
+<circle cx="376" cy="56" r="1.9"/>
+<circle cx="360" cy="56" r="1.9"/>
+<circle cx="344" cy="56" r="1.9"/>
+<circle cx="344" cy="78" r="1.9"/>
+<circle cx="328" cy="78" r="1.9"/>
+<circle cx="312" cy="78" r="1.9"/>
+<circle cx="296" cy="78" r="1.9"/>
+<circle cx="296" cy="100" r="1.9"/>
+<circle cx="280" cy="100" r="1.9"/>
+<circle cx="264" cy="100" r="1.9"/>
+<circle cx="264" cy="122" r="1.9"/>
+<circle cx="248" cy="122" r="1.9"/>
+<circle cx="232" cy="122" r="1.9"/>
+<circle cx="216" cy="122" r="1.9"/>
+<circle cx="216" cy="144" r="1.9"/>
+<circle cx="200" cy="144" r="1.9"/>
+<circle cx="184" cy="144" r="1.9"/>
+<circle cx="168" cy="144" r="1.9"/>
+<circle cx="168" cy="166" r="1.9"/>
+<circle cx="152" cy="166" r="1.9"/>
+<circle cx="136" cy="166" r="1.9"/>
+<circle cx="120" cy="166" r="1.9"/>
+<circle cx="104" cy="166" r="1.9"/>
+<circle cx="88" cy="166" r="1.9"/>
+<circle cx="72" cy="166" r="1.9"/>
+<circle cx="72" cy="144" r="1.9"/>
+<circle cx="56" cy="144" r="1.9"/>
+<circle cx="56" cy="122" r="1.9"/>
+<circle cx="40" cy="122" r="1.9"/>
+<circle cx="40" cy="100" r="1.9"/>
+<circle cx="40" cy="78" r="1.9"/>
+<circle cx="56" cy="78" r="1.9"/>
+<circle cx="56" cy="56" r="1.9"/>
+<circle cx="72" cy="56" r="1.9"/>
+<circle cx="72" cy="34" r="1.9"/>
+<circle cx="88" cy="34" r="1.9"/>
+<circle cx="104" cy="34" r="1.9"/>
+<circle cx="120" cy="34" r="1.9"/>
+<circle cx="136" cy="34" r="1.9"/>
+<circle cx="152" cy="34" r="1.9"/>
+<circle cx="168" cy="34" r="1.9"/>
+<circle cx="168" cy="56" r="1.9"/>
+<circle cx="184" cy="56" r="1.9"/>
+<circle cx="200" cy="56" r="1.9"/>
+<circle cx="216" cy="56" r="1.9"/>
+<circle cx="216" cy="78" r="1.9"/>
+<circle cx="232" cy="78" r="1.9"/>
+<circle cx="248" cy="78" r="1.9"/>
+<circle cx="264" cy="78" r="1.9"/>
+<circle cx="296" cy="122" r="1.9"/>
+<circle cx="312" cy="122" r="1.9"/>
+<circle cx="328" cy="122" r="1.9"/>
+<circle cx="344" cy="122" r="1.9"/>
+<circle cx="344" cy="144" r="1.9"/>
+<circle cx="360" cy="144" r="1.9"/>
+<circle cx="376" cy="144" r="1.9"/>
+<circle cx="392" cy="144" r="1.9"/>
+<circle cx="392" cy="166" r="1.9"/>
+<circle cx="408" cy="166" r="1.9"/>
+<circle cx="424" cy="166" r="1.9"/>
+<circle cx="440" cy="166" r="1.9"/>
+<circle cx="456" cy="166" r="1.9"/>
+<circle cx="472" cy="166" r="1.9"/>
+<circle cx="488" cy="166" r="1.9"/>
+<circle cx="488" cy="144" r="1.9"/>
+<circle cx="504" cy="144" r="1.9"/>
+<circle cx="504" cy="122" r="1.9"/>
+<circle cx="520" cy="122" r="1.9"/>
+</g>
+<g class="motion">
+<g><circle r="1.40" fill="#4C8DFF" opacity="0.060"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.243s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="1.50" fill="#4C8DFF" opacity="0.068"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.227s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="1.60" fill="#4C8DFF" opacity="0.087"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.210s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="1.70" fill="#4C8DFF" opacity="0.113"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.194s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="1.80" fill="#4C8DFF" opacity="0.147"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.178s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="1.90" fill="#4C8DFF" opacity="0.187"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.162s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.00" fill="#4C8DFF" opacity="0.233"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.146s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.10" fill="#4C8DFF" opacity="0.284"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.130s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.20" fill="#4C8DFF" opacity="0.342"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.113s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.30" fill="#4C8DFF" opacity="0.404"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.097s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.40" fill="#4C8DFF" opacity="0.472"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.081s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.50" fill="#4C8DFF" opacity="0.544"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.065s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.60" fill="#4C8DFF" opacity="0.621"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.049s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.70" fill="#4C8DFF" opacity="0.703"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.032s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="2.80" fill="#4C8DFF" opacity="0.789"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.016s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+<g><circle r="4.2" fill="#EEF3F8" filter="url(#glow)"/><animateMotion dur="3.43s" repeatCount="indefinite" begin="-0.000s" rotate="auto"><mpath href="#curve" xlink:href="#curve"/></animateMotion></g>
+</g>
+<g class="still"><circle cx="496.6" cy="151.3" r="1.40" fill="#4C8DFF" opacity="0.060"/><circle cx="499.6" cy="148.7" r="1.50" fill="#4C8DFF" opacity="0.068"/><circle cx="502.4" cy="146.0" r="1.60" fill="#4C8DFF" opacity="0.087"/><circle cx="504.9" cy="143.1" r="1.70" fill="#4C8DFF" opacity="0.113"/><circle cx="507.3" cy="140.1" r="1.80" fill="#4C8DFF" opacity="0.147"/><circle cx="509.5" cy="136.9" r="1.90" fill="#4C8DFF" opacity="0.187"/><circle cx="511.5" cy="133.6" r="2.00" fill="#4C8DFF" opacity="0.233"/><circle cx="513.3" cy="130.2" r="2.10" fill="#4C8DFF" opacity="0.284"/><circle cx="514.8" cy="126.6" r="2.20" fill="#4C8DFF" opacity="0.342"/><circle cx="516.2" cy="123.0" r="2.30" fill="#4C8DFF" opacity="0.404"/><circle cx="517.4" cy="119.3" r="2.40" fill="#4C8DFF" opacity="0.472"/><circle cx="518.3" cy="115.5" r="2.50" fill="#4C8DFF" opacity="0.544"/><circle cx="519.0" cy="111.7" r="2.60" fill="#4C8DFF" opacity="0.621"/><circle cx="519.6" cy="107.8" r="2.70" fill="#4C8DFF" opacity="0.703"/><circle cx="519.9" cy="103.9" r="2.80" fill="#4C8DFF" opacity="0.789"/><circle cx="520.0" cy="100.0" r="4.2" fill="#EEF3F8" filter="url(#glow)"/></g>
+<text x="280" y="194" font-family="ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace" font-size="11.5" fill="#5E6B7E" text-anchor="middle" letter-spacing="1.6">the infinite loop, made finite</text>
+</svg>
