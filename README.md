@@ -14,14 +14,14 @@ change.
 
 [![PyPI](https://img.shields.io/pypi/v/edify-cli?color=4C8DFF&label=pypi)](https://pypi.org/project/edify-cli/)
 [![Python](https://img.shields.io/pypi/pyversions/edify-cli?color=4C8DFF)](https://pypi.org/project/edify-cli/)
-[![CI](https://img.shields.io/github/actions/workflow/status/EDIFY-agents/edify_public/ci.yml?branch=main&label=ci)](https://github.com/EDIFY-agents/edify_public/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/EDIFY-agents/super-claude-skills/ci.yml?branch=main&label=ci)](https://github.com/EDIFY-agents/super-claude-skills/actions/workflows/ci.yml)
 [![Licence](https://img.shields.io/badge/licence-FSL--1.1--Apache--2.0-4C8DFF)](docs/license.md)
 [![Dependencies](https://img.shields.io/badge/runtime%20deps-0-3FB950)](docs/privacy.md#the-supply-chain)
 [![Telemetry](https://img.shields.io/badge/telemetry-none-3FB950)](docs/privacy.md)
 
 **Local-first · No telemetry · Works with your existing coding agent**
 
-[Quickstart](docs/quickstart.md) · [Docs](docs/) · [How it works](#how-it-works) ·
+[Website](https://edify-agents.github.io/super-claude-skills/) · [Quickstart](docs/quickstart.md) · [Docs](docs/) · [How it works](#how-it-works) ·
 [Benchmarks](docs/benchmarks.md) · [Pricing](docs/pricing.md)
 
 </div>
