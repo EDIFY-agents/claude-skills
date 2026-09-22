@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How it works — EDIFY</title>
+<meta name="description" content="Brief, spec, plan, tasks, build, verify: think hard once, then build without thinking. A codebase graph extracted from your code, and verification anyone can re-run.">
+<meta name="theme-color" content="#07090C">
+<link rel="canonical" href="https://edify-agents.github.io/edify_public/how-it-works.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="How it works — EDIFY">
+<meta property="og:description" content="Brief, spec, plan, tasks, build, verify: think hard once, then build without thinking. A codebase graph extracted from your code, and verification anyone can re-run.">
+<meta property="og:url" content="https://edify-agents.github.io/edify_public/how-it-works.html">
+<meta property="og:image" content="https://edify-agents.github.io/edify_public/assets/img/plates/P1-the-fold-hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){try{if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&!sessionStorage.getItem('ed:boot')){var h=document.documentElement;h.setAttribute('data-boot','');window.__edBootFallback=setTimeout(function(){h.removeAttribute('data-boot')},4000)}}catch(e){}})()</script>
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<div id="ed-boot" aria-hidden="true">
+  <div class="boot-bg"></div>
+  <div class="boot-grid" data-field-grid></div>
+  <div class="boot-stack">
+    <svg id="ed-boot-mark" viewBox="0 0 100 100" fill="none">
+      <path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="rgba(232,236,242,0.09)" stroke-width="9" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+      <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="15"></path>
+      <path d="M44 6 L66 94" stroke="rgba(232,236,242,0.09)" stroke-width="9"></path>
+      <path data-boot-draw d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#2C6FD6" stroke-width="9" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+      <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="15"></path>
+      <path data-boot-draw d="M44 6 L66 94" stroke="#2C6FD6" stroke-width="9"></path>
+    </svg>
+    <div class="boot-word">EDIFY</div>
+    <div class="boot-hide">
+      <div id="ed-boot-log"></div>
+      <div class="boot-skip">any key to skip</div>
+    </div>
+  </div>
+</div>
+<div class="grain" data-grain aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="lockup" href="./" aria-label="EDIFY home">
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#E8ECF2" stroke-width="11" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+        <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="18"></path>
+        <path data-nav-spine d="M44 6 L66 94" stroke="#E8ECF2" stroke-width="11"></path>
+      </svg>
+      <span>EDIFY</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="how-it-works.html" aria-current="page">How it works</a>
+      <a href="benchmarks.html">Benchmarks</a>
+      <a href="docs.html">Docs</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="gh" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">GitHub <span style="color:var(--ed-text-3)">&#8599;</span></a>
+      <a class="btn btn-fill btn-sm" href="docs.html#install">Install EDIFY</a>
+    </nav>
+    <button class="burger" data-menu-toggle aria-label="Menu" aria-expanded="false" aria-controls="ed-menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="menu" id="ed-menu">
+  <div class="menu-top"><button data-menu-toggle aria-label="Close menu">X</button></div>
+  <nav class="menu-list" aria-label="Mobile">
+    <a href="./">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="benchmarks.html">Benchmarks</a>
+    <a href="docs.html">Docs</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">GitHub &#8599;</a>
+    <a class="cta" href="docs.html#install">Install EDIFY</a>
+  </nav>
+</div>
+<main id="main">
+<section class="page-hero">
+  <div class="band">
+    <div class="eyebrow bare">How it works</div>
+    <h1 class="h-display w18" data-rv="claim">
+      <span class="ln"><span>Brief to verify,</span></span>
+      <span class="ln"><span>one graph underneath,</span></span>
+      <span class="ln"><span class="blue">every step a file.</span></span>
+    </h1>
+    <p class="lead" data-rv="card" data-i="0" style="margin-top:30px">Each step is written twice below: once in plain language, once in the mechanism. A filled square means EDIFY does it today. A hollow amber square means it works, degraded, and says so. A dashed square means it is not claimed.</p>
+    <div class="legend" data-rv="card" data-i="1"><span><i class="sq"></i>does this today</span><span><i class="sq amber"></i>degraded, and says so</span><span><i class="sq off"></i>not claimed</span></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="split">
+    <div>
+      <div class="eyebrow">01 / Think hard once</div>
+      <h2 class="h-section-sm">Spec, plan, tasks</h2>
+      <p class="lead strong">The expensive thinking happens once, in writing, and ends at a human.</p>
+      <p class="body"><code class="c">/spec</code> turns a brief into a specification: what is being built, why, and the assertions that will later become tests. <code class="c">/plan</code> records technology decisions with exact versions and the milestones the build must not re-make. <code class="c">/tasks</code> reads the spec, the plan and the codebase graph and writes a phased task list anchored to real files and line ranges. All three use the strongest model you have, and all three stop for a person to read them.</p>
+      <div class="note"><b>Why.</b> Most rework comes from decisions that were never written down, so every session made them again. Writing them once turns the rest of the work into following instructions.</div>
+      <div class="rows mt-26">
+        <div class="row"><i class="sq"></i><span class="n">Ambiguity logged as an explicit assumption</span><span class="s">spec.md</span></div>
+        <div class="row"><i class="sq"></i><span class="n">Versions pinned exactly, never <code class="c">latest</code></span><span class="s">plan.md</span></div>
+        <div class="row"><i class="sq"></i><span class="n">Tasks anchored to files and line ranges</span><span class="s">tasks.md</span></div>
+        <div class="row"><i class="sq"></i><span class="n">Documents checked against their format</span><span class="s">edify check</span></div>
+      </div>
+      <div class="src"><a href="https://github.com/EDIFY-agents/edify_public/tree/main/examples" target="_blank" rel="noopener">examples/worked-documents</a></div>
+    </div>
+    <div class="plate-frame">
+      <div class="media" data-rv="media" data-i="0" style="aspect-ratio:4/3"><img src="assets/img/plates/P2-context.jpg" alt="" loading="lazy"><div data-field-grid style="position:absolute;inset:0;pointer-events:none"></div></div>
+      <div class="plate-cap">
+        <div style="color:var(--ed-text-4)">specs/orders/</div>
+        <div>&#9500;&#9472; spec.md          <span class="k">/spec</span></div>
+        <div>&#9500;&#9472; plan.md          <span class="k">/plan</span></div>
+        <div>&#9500;&#9472; tasks.md         <span class="k">/tasks</span></div>
+        <div>&#9492;&#9472; verification.md  <span class="k">/verify</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="split">
+    <div data-order style="order:2">
+      <div class="eyebrow">02 / The map</div>
+      <h2 class="h-section-sm">The codebase graph</h2>
+      <p class="lead strong">A map extracted from your code. Not invented by another model.</p>
+      <p class="body"><code class="c">edify init</code> reads every file and writes the graph to <code class="c">.edify/graph/</code>: every file, module, exported symbol, route and table, with the edges between them, as sorted, checksummed text. Your agent shells out to <code class="c">edify graph</code> to ask where something is defined, what depends on it, and whether two tasks touch the same files. A rebuild over unchanged source is byte-identical.</p>
+      <div class="note"><b>Why.</b> Agents rarely fail from lack of intelligence. They fail from wrong, stale or missing context. A question answered from the map costs a line; re-exploring the repo costs the session.</div>
+      <div class="rows mt-26">
+        <div class="row"><i class="sq"></i><span class="n">Python, parsed with a real syntax tree</span><span class="s">built in</span></div>
+        <div class="row"><i class="sq"></i><span class="n">Other languages, parse-grade</span><span class="s">with Universal Ctags</span></div>
+        <div class="row"><i class="sq amber"></i><span class="n">Other languages, without Ctags</span><span class="s">line scanner</span></div>
+        <div class="row"><i class="sq off"></i><span class="n">Any node written by a model</span><span class="s">never</span></div>
+      </div>
+      <div class="src"><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/graph.md" target="_blank" rel="noopener">docs/graph.md</a></div>
+    </div>
+    <div data-order class="panel" style="order:1">
+      <div class="panel-head"><span class="label">edify doctor</span><span class="label" style="color:var(--ed-text-4)">real output</span></div>
+      <div class="term" data-term>
+        <div class="l cmd">edify doctor</div>
+        <div class="l ok"><span class="g">ok</span>        install      edify 0.1.0 · 12 library entries</div>
+        <div class="l ok"><span class="a">degraded</span>  extractor    Python parsed exactly, the rest</div>
+        <div class="l ok">                       scanned — install Universal Ctags</div>
+        <div class="l ok">                       for parse-grade precision</div>
+        <div class="l ok"><span class="g">ok</span>        graph        18 nodes · 21 edges</div>
+        <div class="l ok"><span class="g">ok</span>        skills       7 entries · every role resolves</div>
+        <div class="l ok"><span class="g">ok</span>        governance   33 files recorded</div>
+        <div class="l ok"><span class="g">ok</span>        CLAUDE.md    points at the graph</div>
+        <div class="l"> </div>
+        <div class="l warn">amber — this works, degraded, in the places named above</div>
+      </div>
+      <div class="panel-foot">Amber is a promise kept, not a warning: the extractor degraded and said exactly where.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="split">
+    <div>
+      <div class="eyebrow">03 / Then build without thinking</div>
+      <h2 class="h-section-sm">Build</h2>
+      <p class="lead strong">Tests first. Then the cheapest model that follows instructions makes red go green.</p>
+      <p class="body">Phase 2 of every <code class="c">/build</code> turns each assertion in the spec into an executable test that fails, before any core logic exists. Contracts are frozen at the end of phase 1; everything after phase 2 is making those tests pass, phase by phase, in the order <code class="c">tasks.md</code> sets, with an exit check at the end of each. Progress is a number anyone can watch instead of a claim anyone has to trust.</p>
+      <div class="note"><b>Why.</b> A cheap builder is safe when it is hitting a target that already exists, not judging whether its own work is correct.</div>
+      <div class="g4 cells mt-26 phases4">
+        <div class="cell" style="padding:16px 14px;gap:8px"><span class="id">Phase 1</span><span class="t sm" style="font-size:14px">Contracts frozen</span><span class="src" style="margin:0;font-size:11px">no edits after</span></div>
+        <div class="cell" style="padding:16px 14px;gap:8px"><span class="id">Phase 2</span><span class="t sm" style="font-size:14px">Suite entirely red</span><span class="src" style="margin:0;font-size:11px">the target</span></div>
+        <div class="cell" style="padding:16px 14px;gap:8px"><span class="id">Phases 3–6</span><span class="t sm" style="font-size:14px">Red to green</span><span class="src" style="margin:0;font-size:11px">in order, each checked</span></div>
+        <div class="cell" style="padding:16px 14px;gap:8px"><span class="id">Phase 7</span><span class="t sm" style="font-size:14px">/verify</span><span class="src" style="margin:0;font-size:11px">in a fresh agent</span></div>
+      </div>
+      <div class="src"><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/verification.md" target="_blank" rel="noopener">docs/verification.md</a></div>
+    </div>
+    <div class="plate-frame">
+      <div class="media" data-rv="media" data-i="0" style="aspect-ratio:4/3"><img src="assets/img/plates/P4-execution.jpg" alt="" loading="lazy"><div data-field-grid style="position:absolute;inset:0;pointer-events:none"></div></div>
+      <div class="plate-cap">
+        <div class="cmd">pytest</div>
+        <div style="color:var(--ed-oxide-bright)">phase 2 · the target exists, and it is red</div>
+        <div style="color:var(--ed-blue-bright)">phase 6 · the same target, green</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="split">
+    <div data-order style="order:2">
+      <div class="eyebrow">04 / Evidence</div>
+      <h2 class="h-section-sm">Verify</h2>
+      <p class="lead strong">An independent pass that anyone can re-run, at any time.</p>
+      <p class="body"><code class="c">/verify</code> checks the code against the spec and the plan and writes <code class="c">verification.md</code>. It runs on a strong model and never in a session that wrote code. Alongside it, <code class="c">edify check</code> reports what is wrong with the documents themselves, with a file, a line, and a rule name.</p>
+      <div class="note"><b>Why.</b> An implementer approving its own work is not verification. And "it works" is a claim; a report anyone can reproduce is evidence.</div>
+      <div class="rows mt-26">
+        <div class="row"><i class="sq"></i><span class="n">Verification in a session that wrote no code</span><span class="s">/verify</span></div>
+        <div class="row"><i class="sq"></i><span class="n">Document rules with file and line</span><span class="s">edify check</span></div>
+        <div class="row"><i class="sq"></i><span class="n">A gate, when you ask for one</span><span class="s">--exit-code</span></div>
+        <div class="row"><i class="sq off"></i><span class="n">Blocking changes on its own</span><span class="s">not claimed</span></div>
+      </div>
+    </div>
+    <div data-order class="panel" style="order:1">
+      <div class="panel-head"><span class="label">.github/workflows/ci.yml</span><span class="label" style="color:var(--ed-text-4)">a gate you own</span></div>
+      <div class="term" data-term>
+        <div class="l dim"># in your CI, owned by your team</div>
+        <div class="l ok">- run: pipx install edify-cli</div>
+        <div class="l ok">- run: edify check --exit-code</div>
+        <div class="l ok">- run: edify governance verify --exit-code</div>
+        <div class="l"> </div>
+        <div class="l cmd">edify check</div>
+        <div class="l err">specs/orders/plan.md:70: error: [plan-decision-no-version]</div>
+        <div class="l ok">    D-2 names no exact version</div>
+        <div class="l"> </div>
+        <div class="l ok">1 error · 1 warning · 0 notes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="eyebrow quiet">05 / The CLI</div>
+  <h2 class="h-section-sm">Six commands you will actually type.</h2>
+  <p class="lead">The slash commands run inside your agent. These run in your terminal, work offline, and print plain text or <code class="c">--json</code>.</p>
+  <div class="g3 mt-34">
+    <div class="cell panel" data-rv="card" data-i="0"><span class="cmd">edify init</span><span class="b">Detects the stack, extracts the graph, scrapes conventions, installs matching skills, writes a short CLAUDE.md, and records every file it put there.</span></div>
+    <div class="cell panel" data-rv="card" data-i="1"><span class="cmd">edify doctor</span><span class="b">Green, amber, red. Amber means something works, degraded, and names where.</span></div>
+    <div class="cell panel" data-rv="card" data-i="2"><span class="cmd">edify graph</span><span class="b"><code class="c">where</code>, <code class="c">dependents</code>, <code class="c">defines</code>, <code class="c">references</code>, <code class="c">overlap</code>. Answers carry a file and a line.</span></div>
+    <div class="cell panel" data-rv="card" data-i="3"><span class="cmd">edify check</span><span class="b">What is wrong with the documents. <code class="c">--fix</code>, <code class="c">--json</code>, <code class="c">--exit-code</code>.</span></div>
+    <div class="cell panel" data-rv="card" data-i="4"><span class="cmd">edify governance</span><span class="b">Every installed file with its origin, licence and hash, and whether it changed since.</span></div>
+    <div class="cell panel" data-rv="card" data-i="5"><span class="cmd">edify feedback</span><span class="b">Writes a file on your machine and prints the command you run to send it. Nothing leaves on its own.</span></div>
+  </div>
+  <div class="src"><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/cli.md" target="_blank" rel="noopener">docs/cli.md: every command, with real output</a></div>
+</section>
+
+<section class="band">
+  <div class="split">
+    <div>
+      <div class="eyebrow">06 / What lands in your repository</div>
+      <h2 class="h-section-sm w22">Readable files. Nothing hidden.</h2>
+      <p class="lead">About fifteen lines in your agent's instruction file, and one folder. Delete it and your repository is exactly what it was.</p>
+      <div class="panel mt-26">
+        <div class="term">
+          <div class="l ok">CLAUDE.md          <span class="dim"># ~15 lines: the repo, the commands, the graph</span></div>
+          <div class="l ok">AGENTS.md          <span class="dim"># the same block, for every other runtime</span></div>
+          <div class="l ok">.edify/</div>
+          <div class="l ok">  graph/           <span class="dim"># nodes.tsv, edges.tsv, meta</span></div>
+          <div class="l ok">  skills/          <span class="dim"># the subset your stack matched</span></div>
+          <div class="l ok">  commands/        <span class="dim"># the five command files</span></div>
+          <div class="l ok">  conventions.md   <span class="dim"># scraped, no model call</span></div>
+          <div class="l ok">  governance.tsv   <span class="dim"># origin, licence, hash</span></div>
+          <div class="l ok">specs/&lt;feature&gt;/   <span class="dim"># spec, plan, tasks, verification</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel" style="padding:26px">
+      <div class="label">One row of .edify/governance.tsv</div>
+      <div class="titleblock">
+        <div><span>path</span><span>.edify/skills/planner.md</span></div>
+        <div><span>kind</span><span>skill</span></div>
+        <div><span>origin</span><span>library</span></div>
+        <div><span>licence</span><span>FSL-1.1-Apache-2.0</span></div>
+        <div><span>source</span><span>edify-cli@0.1.0</span></div>
+      </div>
+      <p class="small" style="margin-top:20px">Every file EDIFY installs is recorded at the moment it lands. <code class="c">edify governance verify</code> tells you which ones changed since. A hash and a filename you can check beat a promise you have to trust.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="eyebrow quiet">07 / Limits, first</div>
+  <h2 class="h-section-sm w24">What EDIFY does not do.</h2>
+  <div class="rows mt-34">
+    <div class="row two top"><i class="sq off"></i><span class="n">It does not wrap the agent runtime, host a model, or route between providers.</span></div>
+    <div class="row two top"><i class="sq off"></i><span class="n">It does not run a server, a daemon, or a database.</span></div>
+    <div class="row two top"><i class="sq off"></i><span class="n">It does not enforce anything at runtime. Gates live in your CI, if you want them.</span></div>
+    <div class="row two top"><i class="sq off"></i><span class="n">It does not make a weak model competent. It makes a competent model efficient.</span></div>
+    <div class="row two top"><i class="sq amber"></i><span class="n">It is not for a solo developer on a small project. The value starts where the codebase stops fitting in the context window.</span></div>
+  </div>
+  <div class="btn-row mt-44">
+    <a class="btn btn-fill" href="docs.html#install">Install EDIFY <span class="m">&#8594;</span></a>
+    <a class="btn btn-line" href="benchmarks.html">See the benchmark plan</a>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="foot-top">
+    <div>
+      <div class="foot-brand">
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#E8ECF2" stroke-width="10" stroke-linejoin="miter" stroke-miterlimit="6"></path><path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="16"></path><path d="M44 6 L66 94" stroke="#E8ECF2" stroke-width="10"></path></svg>
+        <span>EDIFY</span>
+      </div>
+      <p class="foot-tag">The reliability layer for AI coding agents working on large, real-world codebases.</p>
+      <div class="btn-row" style="margin-top:26px">
+        <a class="btn btn-fill btn-sm" href="docs.html#install">Install EDIFY <span class="m">&#8594;</span></a>
+        <a class="btn btn-line btn-sm" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">View on GitHub <span class="m">&#8599;</span></a>
+      </div>
+    </div>
+    <div class="foot-cols">
+      <div><h4>Product</h4><a href="how-it-works.html">How it works</a><a href="benchmarks.html">Benchmarks</a><a href="pricing.html">Pricing</a><a href="about.html">About</a></div>
+      <div><h4>Docs</h4><a href="docs.html">Quickstart</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/cli.md" target="_blank" rel="noopener">CLI reference</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/privacy.md" target="_blank" rel="noopener">Privacy</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/faq.md" target="_blank" rel="noopener">FAQ</a></div>
+      <div><h4>GitHub</h4><a href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">Repository</a><a href="https://github.com/EDIFY-agents/edify_public/discussions" target="_blank" rel="noopener">Discussions</a><a href="https://github.com/EDIFY-agents/edify_public/issues" target="_blank" rel="noopener">Issues</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></div>
+    </div>
+  </div>
+  <div class="foot-art" data-field-grid aria-hidden="true">
+    <div class="boxes">
+      <div style="left:3.2%;top:22%;width:14%;height:56%"></div>
+      <div style="left:3.2%;top:44%;width:23%;height:12%"></div>
+      <div style="left:3.2%;top:70%;width:23%;height:12%"></div>
+      <div style="left:47%;top:22%;width:11%;height:56%"></div>
+      <div style="left:56%;top:44%;width:15%;height:12%"></div>
+      <div style="left:70%;top:22%;width:1px;height:56%;border:none;background:rgba(232,236,242,0.055)"></div>
+    </div>
+    <div class="foot-word" data-rv="media" data-i="0"><span>EDIFY</span></div>
+  </div>
+  <div class="foot-line"><span>EDIFY / local-first / no telemetry / files, not conversations</span><span><a href="https://github.com/EDIFY-agents/edify_public/blob/main/LICENSE" target="_blank" rel="noopener">FSL-1.1-Apache-2.0</a> · <a href="https://github.com/EDIFY-agents/edify_public/blob/main/TRADEMARK.md" target="_blank" rel="noopener">Trademark</a> · <a href="https://github.com/EDIFY-agents/edify_public/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a></span></div>
+</footer>
+</body>
+</html>

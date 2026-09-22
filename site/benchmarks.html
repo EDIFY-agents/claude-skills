@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Benchmarks — EDIFY</title>
+<meta name="description" content="Same model, same repo, same task: agent alone vs Spec Kit vs EDIFY. Methodology and results will be public, including the runs where EDIFY loses.">
+<meta name="theme-color" content="#07090C">
+<link rel="canonical" href="https://edify-agents.github.io/edify_public/benchmarks.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Benchmarks — EDIFY">
+<meta property="og:description" content="Same model, same repo, same task: agent alone vs Spec Kit vs EDIFY. Methodology and results will be public, including the runs where EDIFY loses.">
+<meta property="og:url" content="https://edify-agents.github.io/edify_public/benchmarks.html">
+<meta property="og:image" content="https://edify-agents.github.io/edify_public/assets/img/plates/P1-the-fold-hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){try{if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&!sessionStorage.getItem('ed:boot')){var h=document.documentElement;h.setAttribute('data-boot','');window.__edBootFallback=setTimeout(function(){h.removeAttribute('data-boot')},4000)}}catch(e){}})()</script>
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<div id="ed-boot" aria-hidden="true">
+  <div class="boot-bg"></div>
+  <div class="boot-grid" data-field-grid></div>
+  <div class="boot-stack">
+    <svg id="ed-boot-mark" viewBox="0 0 100 100" fill="none">
+      <path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="rgba(232,236,242,0.09)" stroke-width="9" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+      <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="15"></path>
+      <path d="M44 6 L66 94" stroke="rgba(232,236,242,0.09)" stroke-width="9"></path>
+      <path data-boot-draw d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#2C6FD6" stroke-width="9" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+      <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="15"></path>
+      <path data-boot-draw d="M44 6 L66 94" stroke="#2C6FD6" stroke-width="9"></path>
+    </svg>
+    <div class="boot-word">EDIFY</div>
+    <div class="boot-hide">
+      <div id="ed-boot-log"></div>
+      <div class="boot-skip">any key to skip</div>
+    </div>
+  </div>
+</div>
+<div class="grain" data-grain aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="lockup" href="./" aria-label="EDIFY home">
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#E8ECF2" stroke-width="11" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+        <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="18"></path>
+        <path data-nav-spine d="M44 6 L66 94" stroke="#E8ECF2" stroke-width="11"></path>
+      </svg>
+      <span>EDIFY</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="how-it-works.html">How it works</a>
+      <a href="benchmarks.html" aria-current="page">Benchmarks</a>
+      <a href="docs.html">Docs</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="gh" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">GitHub <span style="color:var(--ed-text-3)">&#8599;</span></a>
+      <a class="btn btn-fill btn-sm" href="docs.html#install">Install EDIFY</a>
+    </nav>
+    <button class="burger" data-menu-toggle aria-label="Menu" aria-expanded="false" aria-controls="ed-menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="menu" id="ed-menu">
+  <div class="menu-top"><button data-menu-toggle aria-label="Close menu">X</button></div>
+  <nav class="menu-list" aria-label="Mobile">
+    <a href="./">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="benchmarks.html">Benchmarks</a>
+    <a href="docs.html">Docs</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">GitHub &#8599;</a>
+    <a class="cta" href="docs.html#install">Install EDIFY</a>
+  </nav>
+</div>
+<main id="main">
+<section class="page-hero tall">
+  <canvas id="ed-field" data-mode="field" aria-hidden="true"></canvas>
+  <div class="band">
+    <div class="eyebrow bare">Benchmarks</div>
+    <h1 class="h-display w18" data-rv="claim">
+      <span class="ln"><span>Same model.</span></span>
+      <span class="ln"><span>Same repo.</span></span>
+      <span class="ln"><span class="blue">Same task.</span></span>
+    </h1>
+    <p class="lead" data-rv="card" data-i="0" style="margin-top:30px">The comparison that matters is not against a strawman. It is against a modern, well-configured agent with a good prompt, and against a free alternative people actually use.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="split end">
+    <div>
+      <div class="eyebrow">01 / Status</div>
+      <h2 class="h-section-sm w22" data-rv="claim"><span class="ln"><span>Published empty,</span></span><span class="ln"><span class="blue">on purpose.</span></span></h2>
+    </div>
+    <p class="body" data-rv="card" data-i="0">Methodology and results will be public, including the runs where EDIFY loses. Until real, reproducible numbers exist, every cell below stays a dash. A benchmark filled in before the benchmark ran is the fastest way to lose a technical audience.</p>
+  </div>
+  <div class="panel mt-34" data-rv="card" data-i="1">
+    <div class="panel-head"><span class="status"><i></i>Benchmark in progress</span><span class="label" style="color:var(--ed-text-4)">no number until it is reproducible</span></div>
+    <div class="bench-wrap">
+      <table class="bench">
+        <thead><tr><th scope="col">Metric</th><th scope="col">Agent alone</th><th scope="col">Spec Kit</th><th scope="col" class="us">EDIFY</th></tr></thead>
+        <tbody>
+          <tr><td>Tasks passed</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Tests passing</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Human interventions</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Retries</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Tokens / cost</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Total time</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="eyebrow">02 / The three arms</div>
+  <h2 class="h-section-sm w24">What each column means.</h2>
+  <div class="g3 cells mt-34" style="gap:1px">
+    <div class="cell" data-rv="card" data-i="0"><span class="id">A</span><span class="t">Agent alone</span><span class="b">The same model, in auto mode, with a good prompt and no harness. The baseline that matters, because it is what you are doing today.</span></div>
+    <div class="cell" data-rv="card" data-i="1"><span class="id">B</span><span class="t">Spec Kit</span><span class="b">The closest free alternative in the same shape. A good tool, and the honest comparison.</span></div>
+    <div class="cell" data-rv="card" data-i="2"><span class="id">C</span><span class="t">EDIFY</span><span class="b"><code class="c">/spec</code> &#8594; <code class="c">/plan</code> &#8594; <code class="c">/tasks</code> &#8594; <code class="c">/build</code> &#8594; <code class="c">/verify</code>, with the graph. If this does not beat arm A, the product has no reason to exist, and the page will say so.</span></div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="split">
+    <div>
+      <div class="eyebrow">03 / The minimum credible package</div>
+      <h2 class="h-section-sm w22">What has to be true before a number goes up.</h2>
+      <p class="lead">Seven conditions. Every one of them is checkable in the public repository when the runs land.</p>
+    </div>
+    <div class="rows">
+      <div class="row two top" data-rv="card" data-i="0" data-step="tight"><i class="sq"></i><span class="n">2–3 non-trivial open-source repositories, with real history and more than one language.</span></div>
+      <div class="row two top" data-rv="card" data-i="1" data-step="tight"><i class="sq"></i><span class="n">10–20 varied tasks: features, a refactor, a bug with a wrong first hypothesis, a migration.</span></div>
+      <div class="row two top" data-rv="card" data-i="2" data-step="tight"><i class="sq"></i><span class="n">The same model version, opening prompt and limits across all three arms.</span></div>
+      <div class="row two top" data-rv="card" data-i="3" data-step="tight"><i class="sq"></i><span class="n">Measured: task success, tests, human interventions, retries, tokens and cost, wall-clock time.</span></div>
+      <div class="row two top" data-rv="card" data-i="4" data-step="tight"><i class="sq"></i><span class="n">Scripts, prompts and raw transcripts published in <code class="c">benchmarks/</code>.</span></div>
+      <div class="row two top" data-rv="card" data-i="5" data-step="tight"><i class="sq"></i><span class="n">A short video of a visible failure case.</span></div>
+      <div class="row two top" data-rv="card" data-i="6" data-step="tight"><i class="sq off"></i><span class="n">Case studies from design partners come after, not instead.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <img src="assets/img/plates/P6-the-long-bench.jpg" alt="" loading="lazy">
+  <div class="band split end">
+    <div>
+      <div class="eyebrow">04 / Help run it</div>
+      <h2 class="h-section-sm w22" data-rv="claim"><span class="ln"><span>Reproduce it,</span></span><span class="ln"><span class="blue">or break it.</span></span></h2>
+      <p class="body">Propose a repository, a task, or a flaw in the method. A reproduction report is worth more than a star.</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-fill" href="https://github.com/EDIFY-agents/edify_public/issues/new?template=benchmark_reproduction.yml" target="_blank" rel="noopener">Open a reproduction report <span class="m">&#8599;</span></a>
+      <a class="btn btn-line" href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/benchmarks.md" target="_blank" rel="noopener">docs/benchmarks.md <span class="m">&#8599;</span></a>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="foot-top">
+    <div>
+      <div class="foot-brand">
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#E8ECF2" stroke-width="10" stroke-linejoin="miter" stroke-miterlimit="6"></path><path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="16"></path><path d="M44 6 L66 94" stroke="#E8ECF2" stroke-width="10"></path></svg>
+        <span>EDIFY</span>
+      </div>
+      <p class="foot-tag">The reliability layer for AI coding agents working on large, real-world codebases.</p>
+      <div class="btn-row" style="margin-top:26px">
+        <a class="btn btn-fill btn-sm" href="docs.html#install">Install EDIFY <span class="m">&#8594;</span></a>
+        <a class="btn btn-line btn-sm" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">View on GitHub <span class="m">&#8599;</span></a>
+      </div>
+    </div>
+    <div class="foot-cols">
+      <div><h4>Product</h4><a href="how-it-works.html">How it works</a><a href="benchmarks.html">Benchmarks</a><a href="pricing.html">Pricing</a><a href="about.html">About</a></div>
+      <div><h4>Docs</h4><a href="docs.html">Quickstart</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/cli.md" target="_blank" rel="noopener">CLI reference</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/privacy.md" target="_blank" rel="noopener">Privacy</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/faq.md" target="_blank" rel="noopener">FAQ</a></div>
+      <div><h4>GitHub</h4><a href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">Repository</a><a href="https://github.com/EDIFY-agents/edify_public/discussions" target="_blank" rel="noopener">Discussions</a><a href="https://github.com/EDIFY-agents/edify_public/issues" target="_blank" rel="noopener">Issues</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></div>
+    </div>
+  </div>
+  <div class="foot-art" data-field-grid aria-hidden="true">
+    <div class="boxes">
+      <div style="left:3.2%;top:22%;width:14%;height:56%"></div>
+      <div style="left:3.2%;top:44%;width:23%;height:12%"></div>
+      <div style="left:3.2%;top:70%;width:23%;height:12%"></div>
+      <div style="left:47%;top:22%;width:11%;height:56%"></div>
+      <div style="left:56%;top:44%;width:15%;height:12%"></div>
+      <div style="left:70%;top:22%;width:1px;height:56%;border:none;background:rgba(232,236,242,0.055)"></div>
+    </div>
+    <div class="foot-word" data-rv="media" data-i="0"><span>EDIFY</span></div>
+  </div>
+  <div class="foot-line"><span>EDIFY / local-first / no telemetry / files, not conversations</span><span><a href="https://github.com/EDIFY-agents/edify_public/blob/main/LICENSE" target="_blank" rel="noopener">FSL-1.1-Apache-2.0</a> · <a href="https://github.com/EDIFY-agents/edify_public/blob/main/TRADEMARK.md" target="_blank" rel="noopener">Trademark</a> · <a href="https://github.com/EDIFY-agents/edify_public/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a></span></div>
+</footer>
+</body>
+</html>

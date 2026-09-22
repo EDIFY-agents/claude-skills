@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EDIFY — Your coding agent is fast. Make it reliable.</title>
+<meta name="description" content="EDIFY gives Claude Code, Codex, Cursor and other coding agents the right codebase context, a precise implementation plan, and independent verification for every change. Local-first, no telemetry.">
+<meta name="theme-color" content="#07090C">
+<link rel="canonical" href="https://edify-agents.github.io/edify_public/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="EDIFY — Your coding agent is fast. Make it reliable.">
+<meta property="og:description" content="EDIFY gives Claude Code, Codex, Cursor and other coding agents the right codebase context, a precise implementation plan, and independent verification for every change. Local-first, no telemetry.">
+<meta property="og:url" content="https://edify-agents.github.io/edify_public/">
+<meta property="og:image" content="https://edify-agents.github.io/edify_public/assets/img/plates/P1-the-fold-hero.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>(function(){try{if(!matchMedia('(prefers-reduced-motion:reduce)').matches&&!sessionStorage.getItem('ed:boot')){var h=document.documentElement;h.setAttribute('data-boot','');window.__edBootFallback=setTimeout(function(){h.removeAttribute('data-boot')},4000)}}catch(e){}})()</script>
+<script src="assets/js/site.js" defer></script>
+</head>
+<body>
+<div id="ed-boot" aria-hidden="true">
+  <div class="boot-bg"></div>
+  <div class="boot-grid" data-field-grid></div>
+  <div class="boot-stack">
+    <svg id="ed-boot-mark" viewBox="0 0 100 100" fill="none">
+      <path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="rgba(232,236,242,0.09)" stroke-width="9" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+      <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="15"></path>
+      <path d="M44 6 L66 94" stroke="rgba(232,236,242,0.09)" stroke-width="9"></path>
+      <path data-boot-draw d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#2C6FD6" stroke-width="9" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+      <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="15"></path>
+      <path data-boot-draw d="M44 6 L66 94" stroke="#2C6FD6" stroke-width="9"></path>
+    </svg>
+    <div class="boot-word">EDIFY</div>
+    <div class="boot-hide">
+      <div id="ed-boot-log"></div>
+      <div class="boot-skip">any key to skip</div>
+    </div>
+  </div>
+</div>
+<div class="grain" data-grain aria-hidden="true"></div>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="lockup" href="./" aria-label="EDIFY home">
+      <svg viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#E8ECF2" stroke-width="11" stroke-linejoin="miter" stroke-miterlimit="6"></path>
+        <path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="18"></path>
+        <path data-nav-spine d="M44 6 L66 94" stroke="#E8ECF2" stroke-width="11"></path>
+      </svg>
+      <span>EDIFY</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="how-it-works.html">How it works</a>
+      <a href="benchmarks.html">Benchmarks</a>
+      <a href="docs.html">Docs</a>
+      <a href="pricing.html">Pricing</a>
+      <a class="gh" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">GitHub <span style="color:var(--ed-text-3)">&#8599;</span></a>
+      <a class="btn btn-fill btn-sm" href="docs.html#install">Install EDIFY</a>
+    </nav>
+    <button class="burger" data-menu-toggle aria-label="Menu" aria-expanded="false" aria-controls="ed-menu"><span></span><span></span></button>
+  </div>
+</header>
+<div class="menu" id="ed-menu">
+  <div class="menu-top"><button data-menu-toggle aria-label="Close menu">X</button></div>
+  <nav class="menu-list" aria-label="Mobile">
+    <a href="./">Home</a>
+    <a href="how-it-works.html">How it works</a>
+    <a href="benchmarks.html">Benchmarks</a>
+    <a href="docs.html">Docs</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="about.html">About</a>
+    <a href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">GitHub &#8599;</a>
+    <a class="cta" href="docs.html#install">Install EDIFY</a>
+  </nav>
+</div>
+<main id="main">
+<section class="hero" aria-labelledby="hero-h">
+  <canvas id="ed-field" data-mode="grille" aria-hidden="true"></canvas>
+  <div id="ed-ceiling-label" aria-hidden="true">your repository</div>
+  <div class="watermark" aria-hidden="true"><span>EDIFY</span></div>
+  <div class="hero-inner">
+    <div class="badge" data-rv="card" data-i="0"><i></i>Local-first reliability for AI coding agents</div>
+    <h1 id="hero-h" class="h-hero" data-rv="claim">
+      <span class="ln"><span>Your coding agent</span></span>
+      <span class="ln"><span>is fast.</span></span>
+      <span class="ln"><span class="blue">Make it reliable.</span></span>
+    </h1>
+    <p class="hero-lead" data-rv="card" data-i="2">EDIFY gives Claude Code, Codex, Cursor and other coding agents the right codebase context, a precise implementation plan, and independent verification for every change.</p>
+    <div class="btn-row" data-rv="card" data-i="3" style="margin-top:40px">
+      <a class="btn btn-fill" href="docs.html#install">Install EDIFY <span class="m">&#8594;</span></a>
+      <a class="btn btn-line" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">View on GitHub <span class="m">&#8599;</span></a>
+    </div>
+    <div class="micro" data-rv="card" data-i="4">Local-first &middot; No telemetry &middot; Works with your existing coding agent</div>
+
+    <div class="hero-proof">
+      <div class="glass hero-term" data-rv="card" data-i="5">
+        <div class="panel-head" style="border-bottom-color:var(--ed-line-1)">
+          <span class="label">the 60-second path</span>
+          <button class="copy" data-copy="pipx install edify-cli&#10;cd your-repository&#10;edify init --yes">copy</button>
+        </div>
+        <div class="term" data-term>
+          <div class="l cmd">pipx install edify-cli</div>
+          <div class="l cmd">cd your-repository</div>
+          <div class="l cmd">edify init --yes</div>
+          <div class="l dim">reading every file, building the map</div>
+          <div class="l ok"><span class="k">stack</span>       fastapi, python</div>
+          <div class="l ok"><span class="k">graph</span>       18 nodes · 21 edges · 5 files</div>
+          <div class="l ok"><span class="k">conventions</span> scraped from config files · zero model calls</div>
+          <div class="l ok"><span class="k">skills</span>      7 installed · 5 did not match this stack</div>
+          <div class="l ok"><span class="k">commands</span>    5 installed under .edify/commands/</div>
+          <div class="l ok"><span class="k">CLAUDE.md</span>   written</div>
+          <div class="l ok"><span class="k">governance</span>  33 files recorded · origin, licence, hash</div>
+          <div class="l"> </div>
+          <div class="l done">Next: /spec — write the spec before anything else.</div>
+        </div>
+        <div class="term-cap"><span>real output · edify 0.1.0 · a 5-file FastAPI sample repo</span><span>no model was called</span></div>
+      </div>
+      <div class="plate-frame" data-rv="card" data-i="6">
+        <div class="media" data-rv="media" data-i="1">
+          <img src="assets/img/plates/P1-the-fold-hero.jpg" alt="" width="1200" height="800">
+        </div>
+        <div class="plate-cap">
+          <div class="cmd">edify graph where is_expired</div>
+          <div><span class="k">&#8594;</span> src/auth/clock.py:6  symbol  is_expired</div>
+          <div style="color:var(--ed-text-4);margin-top:6px">A question, answered from the map. Not a new chatbot.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="p-h">
+  <div class="split s-8-12">
+    <div>
+      <div class="eyebrow">01 / The problem</div>
+      <h2 id="p-h" class="h-section-sm w20" data-rv="claim">
+        <span class="ln"><span>AI changes are fast to produce.</span></span>
+        <span class="ln"><span class="blue">They are still expensive to trust.</span></span>
+      </h2>
+      <p class="body" data-rv="card" data-i="0">A frontier model with a plain setup writes excellent code and still stumbles on serious repositories. Not from lack of intelligence. From three things that happen on every large codebase.</p>
+      <div class="pains">
+        <div class="pain" data-rv="card" data-i="1"><div class="k">Lost map</div><div class="v"><b>The agent explores the repo again.</b> Every session starts blind and re-derives the same structure, slightly differently each time.</div></div>
+        <div class="pain" data-rv="card" data-i="2"><div class="k">Drift</div><div class="v"><b>Each session reinterprets the work.</b> The same task, done in parts, in different ways, with decisions silently re-made.</div></div>
+        <div class="pain" data-rv="card" data-i="3"><div class="k">Looks right</div><div class="v"><b>The change passes a glance and is wrong.</b> It breaks an intent, an architectural boundary, a version, or a dependency nobody wrote down.</div></div>
+      </div>
+    </div>
+    <div id="ed-meter-card" class="panel" data-rv="card" data-i="1">
+      <div class="meter-top">
+        <span class="label">Where the work lives</span>
+        <span id="ed-meter-phase">brief</span>
+      </div>
+      <div class="meter-mid">
+        <div id="ed-meter-value">1<small>/6</small></div>
+        <div id="ed-meter-file">your words<br><span>a paragraph, not a prompt</span></div>
+      </div>
+      <div class="meter-bar" aria-hidden="true">
+        <div id="ed-meter-fill"></div>
+        <div class="meter-tick human" style="left:33.33%"></div><div class="meter-tick human" style="left:50%"></div><div class="meter-tick human" style="left:66.66%"></div><div class="meter-tick" style="left:83.33%"></div>
+      </div>
+      <div class="meter-scale"><span>brief</span><span>three human reads</span><span>evidence</span></div>
+      <div class="meter-cells">
+        <div data-phase="0">brief</div><div data-phase="1">spec</div><div data-phase="2">plan</div><div data-phase="3">tasks</div><div data-phase="4">build</div><div data-phase="5">verify</div>
+      </div>
+      <div class="meter-foot">Every step ends in a file in your repository, so the next session reads the decision instead of re-making it. Nothing important lives in a chat.</div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="h-h">
+  <div class="eyebrow">02 / How it works</div>
+  <h2 id="h-h" class="h-section w26" data-rv="claim">
+    <span class="ln"><span>Think hard once.</span></span>
+    <span class="ln"><span class="blue">Then build without thinking.</span></span>
+  </h2>
+  <p class="lead" data-rv="card" data-i="0">Five commands, typed into the agent you already use. The first three are slow, use the strongest model, and end at a human reading them. The last two are fast, cheap, and end at evidence.</p>
+  <div class="pipeline" data-rv="card" data-i="1" aria-label="Brief, spec, plan, tasks, build, verify"><span>Brief</span><span>Spec</span><span>Plan</span><span>Tasks</span><span>Build</span><span>Verify</span></div>
+  <div id="ed-stack">
+    <article class="stack-card">
+      <div class="stack-head"><span class="i">01 / Spec <b>/spec</b></span><span class="c">strongest model</span></div>
+      <div class="stack-body">
+        <div><div class="t">A brief becomes a specification.</div><div class="b">What is being built and why, with the assertions that will later become tests. Ambiguity is written down as an assumption, not resolved quietly.</div></div>
+        <div class="stack-gate"><div class="gl">Ends at</div><div class="gv"><i class="sq"></i>a human reads it</div><div class="gs">specs/&lt;feature&gt;/spec.md</div></div>
+      </div>
+    </article>
+    <article class="stack-card">
+      <div class="stack-head"><span class="i">02 / Plan <b>/plan</b></span><span class="c">strongest model</span></div>
+      <div class="stack-body">
+        <div><div class="t">Technology decisions, with exact versions.</div><div class="b">Milestones and the decisions the build must not re-make. <code class="c">2.3</code>, not <code class="c">^2.3</code> and not <code class="c">latest</code>. Only when the feature needs one.</div></div>
+        <div class="stack-gate"><div class="gl">Ends at</div><div class="gv"><i class="sq"></i>a human reads it</div><div class="gs">specs/&lt;feature&gt;/plan.md</div></div>
+      </div>
+    </article>
+    <article class="stack-card">
+      <div class="stack-head"><span class="i">03 / Tasks <b>/tasks</b></span><span class="c">strongest model + the graph</span></div>
+      <div class="stack-body">
+        <div><div class="t">Exactly what changes, where, in what order.</div><div class="b">A phased task list anchored to real files and line ranges from the codebase graph, so the builder never has to go looking.</div></div>
+        <div class="stack-gate"><div class="gl">Ends at</div><div class="gv"><i class="sq"></i>a human reads it</div><div class="gs">specs/&lt;feature&gt;/tasks.md</div></div>
+      </div>
+    </article>
+    <article class="stack-card">
+      <div class="stack-head"><span class="i">04 / Build <b>/build</b></span><span class="c">cheapest model that follows instructions</span></div>
+      <div class="stack-body">
+        <div><div class="t">Tests first, then make red go green.</div><div class="b">Phase 2 turns every spec assertion into a failing test before any core logic exists. The builder hits a target that already exists instead of grading itself.</div></div>
+        <div class="stack-gate"><div class="gl">Ends at</div><div class="gv"><i class="sq"></i>a diff and a green suite</div><div class="gs">your test runner</div></div>
+      </div>
+    </article>
+    <article class="stack-card">
+      <div class="stack-head"><span class="i">05 / Verify <b>/verify</b></span><span class="c">strong model, never a session that wrote code</span></div>
+      <div class="stack-body">
+        <div><div class="t">Evidence anyone can re-run.</div><div class="b">An independent pass checks the change against the spec and the plan. It can be re-run by anyone, at any time, including six months later.</div></div>
+        <div class="stack-gate"><div class="gl">Ends at</div><div class="gv"><i class="sq"></i>a report anyone can read</div><div class="gs">specs/&lt;feature&gt;/verification.md</div></div>
+      </div>
+    </article>
+  </div>
+  <div class="src"><a href="how-it-works.html">The full workflow, step by step &#8594;</a></div>
+</section>
+
+<section class="band-full" aria-labelledby="a-h">
+  <div class="band" style="padding-bottom:34px">
+    <div class="eyebrow">03 / Works with your agent</div>
+    <div class="gallery-head">
+      <h2 id="a-h" class="h-section w22" data-rv="claim" style="margin:0">
+        <span class="ln"><span>Not another coding agent.</span></span>
+        <span class="ln"><span class="blue">Your agent, made reliable.</span></span>
+      </h2>
+      <div class="gallery-meta"><span id="ed-gallery-count">01 / 06</span><span class="bar"><span id="ed-gallery-bar"></span></span><span style="color:var(--ed-text-4)">scroll &#8594;</span></div>
+    </div>
+    <div class="gallery-rule" data-rv="rule"></div>
+  </div>
+  <div id="ed-track" role="list">
+    <div class="frame" data-frame role="listitem" tabindex="0" data-detail-text="Reads CLAUDE.md. Commands land in .claude/commands/, skills in .claude/skills/. Installed by plain `edify init`.">
+      <div class="px" data-px><img src="assets/img/plates/P2-context.jpg" alt="" loading="lazy"><div class="over" data-field-grid></div><span class="tag">/spec &#8594; /verify</span></div>
+      <div class="fb"><div class="fh"><span class="no">01</span><span class="kind">runtime</span></div><div class="ft">Claude Code</div><div class="fd">Works with your existing agent. The five commands appear where Claude Code already looks for them.</div><div class="ff"><i class="sq"></i>.claude/commands/</div></div>
+    </div>
+    <div class="frame" data-frame role="listitem" tabindex="0" data-detail-text="Reads AGENTS.md. Commands land in .codex/prompts/. Installed by `edify init new .`.">
+      <div class="px" data-px><img src="assets/img/plates/P3-completeness.jpg" alt="" loading="lazy"><div class="over" data-field-grid></div><span class="tag">AGENTS.md</span></div>
+      <div class="fb"><div class="fh"><span class="no">02</span><span class="kind">runtime</span></div><div class="ft">OpenAI Codex</div><div class="fd">Same workflow, different runtime. One methodology, a thin pointer in Codex's own directory.</div><div class="ff"><i class="sq"></i>.codex/prompts/</div></div>
+    </div>
+    <div class="frame" data-frame role="listitem" tabindex="0" data-detail-text="Reads AGENTS.md and .cursor/rules/edify.mdc. Commands land in .cursor/commands/.">
+      <div class="px" data-px><img src="assets/img/plates/P4-execution.jpg" alt="" loading="lazy"><div class="over" data-field-grid></div><span class="tag">.cursor/rules/edify.mdc</span></div>
+      <div class="fb"><div class="fh"><span class="no">03</span><span class="kind">runtime</span></div><div class="ft">Cursor</div><div class="fd">EDIFY adds structure around the agent. It does not wrap it, host a model, or route between providers.</div><div class="ff"><i class="sq"></i>.cursor/commands/</div></div>
+    </div>
+    <div class="frame" data-frame role="listitem" tabindex="0" data-detail-text="Reads GEMINI.md. Commands land in .gemini/commands/ as TOML.">
+      <div class="px" data-px><img src="assets/img/plates/P5-evidence.jpg" alt="" loading="lazy"><div class="over" data-field-grid></div><span class="tag">GEMINI.md</span></div>
+      <div class="fb"><div class="fh"><span class="no">04</span><span class="kind">runtime</span></div><div class="ft">Gemini CLI</div><div class="fd">Agent-agnostic workflow. The methodology stays in one place; each runtime gets its own front door.</div><div class="ff"><i class="sq"></i>.gemini/commands/</div></div>
+    </div>
+    <div class="frame" data-frame role="listitem" tabindex="0" data-detail-text="Reads .github/copilot-instructions.md. Commands land in .github/prompts/.">
+      <div class="px" data-px><img src="assets/img/plates/P6-the-long-bench.jpg" alt="" loading="lazy"><div class="over" data-field-grid></div><span class="tag">copilot-instructions.md</span></div>
+      <div class="fb"><div class="fh"><span class="no">05</span><span class="kind">runtime</span></div><div class="ft">GitHub Copilot</div><div class="fd">Use the agent you already pay for. EDIFY is Markdown files and a CLI, nothing to host.</div><div class="ff"><i class="sq"></i>.github/prompts/</div></div>
+    </div>
+    <div class="frame" data-frame role="listitem" tabindex="0" data-detail-text="Windsurf reads .windsurf/rules/edify.md; workflows land in .windsurf/workflows/. Anything else that reads AGENTS.md is supported too.">
+      <div class="px" data-px><img src="assets/img/plates/P8-the-mark-struck.jpg" alt="" loading="lazy"><div class="over" data-field-grid></div><span class="tag">AGENTS.md</span></div>
+      <div class="fb"><div class="fh"><span class="no">06</span><span class="kind">runtime + standard</span></div><div class="ft">Windsurf &middot; AGENTS.md</div><div class="fd">Broad compatibility. One <code class="c">edify init new .</code> sets a folder up for every runtime at once.</div><div class="ff"><i class="sq"></i>.windsurf/workflows/</div></div>
+    </div>
+  </div>
+</section>
+
+<div id="ed-marquee" aria-hidden="true">
+  <div id="ed-marquee-inner">
+    <div class="strip"><span>brief</span><span>/</span><span>spec</span><span>/</span><span>plan</span><span>/</span><span>tasks</span><span>/</span><span>build</span><span>/</span><span>verify</span><span>/</span><span>the graph</span><span>/</span><span>files, not chat</span><span>/</span><span>tests first</span><span>/</span><span>local-first</span><span>/</span><span>no telemetry</span><span>/</span><span>evidence</span><span>/</span></div>
+    <div class="strip"><span>brief</span><span>/</span><span>spec</span><span>/</span><span>plan</span><span>/</span><span>tasks</span><span>/</span><span>build</span><span>/</span><span>verify</span><span>/</span><span>the graph</span><span>/</span><span>files, not chat</span><span>/</span><span>tests first</span><span>/</span><span>local-first</span><span>/</span><span>no telemetry</span><span>/</span><span>evidence</span><span>/</span></div>
+  </div>
+</div>
+
+<section class="band" aria-labelledby="g-h">
+  <div class="eyebrow">04 / The codebase graph</div>
+  <h2 id="g-h" class="h-section w26" data-rv="claim">
+    <span class="ln"><span>A map extracted from your code.</span></span>
+    <span class="ln"><span class="blue">Not invented by another model.</span></span>
+  </h2>
+  <p class="lead" data-rv="card" data-i="0">Every file, module, symbol, route and table, with the edges between them, as sorted text in your repository. Your agent asks a question instead of reading files until it runs out of context.</p>
+  <div class="split s-graph mt-34">
+    <div class="panel" data-rv="card" data-i="1">
+      <div class="panel-head"><span class="label">edify graph</span><span class="label" style="color:var(--ed-text-4)">real output</span></div>
+      <div class="term" data-term style="min-height:430px">
+        <div class="l cmd">edify graph where is_expired</div>
+        <div class="l ok">src/auth/clock.py:6     symbol  is_expired</div>
+        <div class="l"> </div>
+        <div class="l cmd">edify graph dependents is_expired</div>
+        <div class="l ok">src/auth/session.py:3   symbol  create_session</div>
+        <div class="l ok">src/auth/session.py:1   file    src/auth/session.py</div>
+        <div class="l"> </div>
+        <div class="l cmd">edify graph defines src/api.py</div>
+        <div class="l ok">7    symbol  login</div>
+        <div class="l ok">11   symbol  refresh</div>
+        <div class="l ok">6    route   POST /login</div>
+        <div class="l ok">10   route   POST /refresh</div>
+        <div class="l"> </div>
+        <div class="l cmd">edify graph references create_session</div>
+        <div class="l ok">src/api.py:7            symbol  login</div>
+        <div class="l ok">src/api.py:11           symbol  refresh</div>
+        <div class="l"> </div>
+        <div class="l dim"># never written by a model. A missing symbol is a visible</div>
+        <div class="l dim"># gap, not an invented fact.</div>
+      </div>
+      <div class="panel-foot">A rebuild over unchanged source is byte-identical, so a graph diff is a structural diff of the codebase. Regenerate it any time.</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="panel" data-rv="card" data-i="2">
+        <div class="tabs" data-tabs="ed-matrix-body" role="tablist" aria-label="The graph">
+          <button role="tab" id="t-q" aria-controls="p-q" aria-selected="true">Queries</button>
+          <button role="tab" id="t-c" aria-controls="p-c" aria-selected="false" tabindex="-1">Coverage</button>
+          <button role="tab" id="t-f" aria-controls="p-f" aria-selected="false" tabindex="-1">Files</button>
+        </div>
+        <div id="ed-matrix-body">
+          <div class="tab-panel" id="p-q" role="tabpanel" aria-labelledby="t-q">
+            <p class="small" style="max-width:60ch">Five questions an agent asks before it edits anything. Each answer carries a file and a line.</p>
+            <div class="rows mt-18">
+              <div class="row"><i class="sq"></i><span class="n">Where is this defined?</span><span class="s">graph where &lt;symbol&gt;</span></div>
+              <div class="row"><i class="sq"></i><span class="n">What breaks if it changes?</span><span class="s">graph dependents &lt;symbol&gt;</span></div>
+              <div class="row"><i class="sq"></i><span class="n">What does this file export?</span><span class="s">graph defines &lt;file&gt;</span></div>
+              <div class="row"><i class="sq"></i><span class="n">Who calls or imports it?</span><span class="s">graph references &lt;symbol&gt;</span></div>
+              <div class="row"><i class="sq"></i><span class="n">Can two tasks run at once?</span><span class="s">graph overlap "a" "b"</span></div>
+            </div>
+          </div>
+          <div class="tab-panel" id="p-c" role="tabpanel" aria-labelledby="t-c" hidden>
+            <p class="small" style="max-width:60ch">Coverage, stated honestly. Where a language is not covered the graph has no nodes for it, and says so.</p>
+            <div class="rows mt-18">
+              <div class="row"><i class="sq"></i><span class="n">Python</span><span class="s">real syntax tree</span></div>
+              <div class="row"><i class="sq"></i><span class="n">Any language, with Universal Ctags</span><span class="s">parse-grade</span></div>
+              <div class="row"><i class="sq amber"></i><span class="n">Everything else, built in</span><span class="s">line scanner, degraded</span></div>
+              <div class="row"><i class="sq off"></i><span class="n">A language nothing covers</span><span class="s">no nodes, named</span></div>
+            </div>
+          </div>
+          <div class="tab-panel" id="p-f" role="tabpanel" aria-labelledby="t-f" hidden>
+            <p class="small" style="max-width:60ch">Plain, sorted, checksummed text in <code class="c">.edify/graph/</code>. Any tool can read it; git can diff it.</p>
+            <div class="rows mt-18">
+              <div class="row"><i class="sq"></i><span class="n">nodes.tsv</span><span class="s">id · kind · file · line · name</span></div>
+              <div class="row"><i class="sq"></i><span class="n">edges.tsv</span><span class="s">who imports, calls, defines</span></div>
+              <div class="row"><i class="sq"></i><span class="n">meta</span><span class="s">backend: parsed or scanned</span></div>
+              <div class="row"><i class="sq off"></i><span class="n">A model-written fallback</span><span class="s">never</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-pad" data-rv="card" data-i="3" style="padding:26px">
+        <div class="label">The sample repo's map, by kind</div>
+        <div class="bars">
+          <div><div class="bar-l"><span>symbol</span><span>6</span></div><div class="bar-t"><div data-bar style="width:33.3%"></div></div></div>
+          <div><div class="bar-l"><span>file</span><span>5</span></div><div class="bar-t"><div data-bar style="width:27.8%"></div></div></div>
+          <div><div class="bar-l"><span>module</span><span>4</span></div><div class="bar-t"><div data-bar style="width:22.2%"></div></div></div>
+          <div><div class="bar-l"><span>route</span><span>2</span></div><div class="bar-t"><div data-bar style="width:11.1%;background:var(--ed-blue-bright)"></div></div></div>
+          <div><div class="bar-l"><span>package</span><span>1</span></div><div class="bar-t"><div data-bar style="width:5.6%"></div></div></div>
+        </div>
+        <div class="src" style="margin-top:20px;padding-top:16px;border-top:1px solid var(--ed-line-1)">.edify/graph/nodes.tsv · 18 nodes · 21 edges</div>
+      </div>
+    </div>
+  </div>
+  <div class="nums">
+    <div><div class="num" data-rv="num" data-i="0" data-value="5">5</div><div class="num-l">files read</div><div class="num-s">sample repo</div></div>
+    <div><div class="num" data-rv="num" data-i="1" data-value="18">18</div><div class="num-l">nodes extracted</div><div class="num-s">nodes.tsv</div></div>
+    <div><div class="num" data-rv="num" data-i="2" data-value="21">21</div><div class="num-l">edges between them</div><div class="num-s">edges.tsv</div></div>
+    <div><div class="num blue" data-rv="num" data-i="3" data-value="0">0</div><div class="num-l">model calls to build it</div><div class="num-s">edify init</div></div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="v-h">
+  <div class="eyebrow">05 / Verification</div>
+  <h2 id="v-h" class="h-section w24" data-rv="claim">
+    <span class="ln"><span>Define correct before implementation.</span></span>
+    <span class="ln"><span class="blue">Verify independently at the end.</span></span>
+  </h2>
+  <div class="split mt-34" style="gap:18px">
+    <div class="panel" data-rv="card" data-i="0">
+      <div class="panel-head"><span class="label">edify check</span><span class="label" style="color:var(--ed-text-4)">real output</span></div>
+      <div class="term" data-term>
+        <div class="l cmd">edify check</div>
+        <div class="l err">specs/orders/plan.md:70: error: [plan-decision-no-version]</div>
+        <div class="l ok">    D-2 names no exact version</div>
+        <div class="l dim">    `2.3`, not `^2.3` and not `latest`</div>
+        <div class="l"> </div>
+        <div class="l warn">specs/orders/plan.md:152: warn: [plan-seed-no-range]</div>
+        <div class="l ok">    context seed `src/auth.py` has no line range</div>
+        <div class="l"> </div>
+        <div class="l ok">1 error · 1 warning · 0 notes</div>
+        <div class="l"> </div>
+        <div class="l dim"># nothing blocks. `--exit-code` is how you make it</div>
+        <div class="l dim"># a gate you own, in your own CI.</div>
+      </div>
+    </div>
+    <div class="g2 cells" style="gap:1px">
+      <div class="cell" data-rv="card" data-i="1"><span class="id">01</span><span class="t sm">Failing tests first</span><span class="b">Every spec assertion becomes an executable test that fails before any core logic exists.</span></div>
+      <div class="cell" data-rv="card" data-i="2"><span class="id">02</span><span class="t sm">The builder doesn't grade itself</span><span class="b">/verify runs in a session that wrote no code.</span></div>
+      <div class="cell" data-rv="card" data-i="3"><span class="id">03</span><span class="t sm">Re-runnable, forever</span><span class="b">Anyone can re-run /verify, including six months later.</span></div>
+      <div class="cell" data-rv="card" data-i="4"><span class="id">04</span><span class="t sm">Your gate, your CI</span><span class="b"><code class="c">edify check --exit-code</code> fails a build only because you asked it to.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="b-h">
+  <div class="split end">
+    <div>
+      <div class="eyebrow">06 / Benchmark</div>
+      <h2 id="b-h" class="h-section w22" data-rv="claim">
+        <span class="ln"><span>Same model.</span></span>
+        <span class="ln"><span>Same repo.</span></span>
+        <span class="ln"><span class="blue">Same task.</span></span>
+      </h2>
+    </div>
+    <p class="body" data-rv="card" data-i="0">Agent alone, Spec Kit, and EDIFY, on real open-source repositories. The table is published empty on purpose: a benchmark filled in before it ran is the fastest way to lose a technical audience.</p>
+  </div>
+  <div class="panel mt-34" data-rv="card" data-i="1">
+    <div class="panel-head"><span class="status"><i></i>Benchmark in progress</span><span class="label" style="color:var(--ed-text-4)">methodology and results will be public</span></div>
+    <div class="bench-wrap">
+      <table class="bench">
+        <thead><tr><th scope="col">Metric</th><th scope="col">Agent alone</th><th scope="col">Spec Kit</th><th scope="col" class="us">EDIFY</th></tr></thead>
+        <tbody>
+          <tr><td>Tasks passed</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Human rework</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Retries</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Tokens / cost</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+          <tr><td>Total time</td><td class="d">—</td><td class="d">—</td><td class="d">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="src"><a href="benchmarks.html">Methodology, and the runs where EDIFY loses &#8594;</a></div>
+</section>
+
+<section class="paper" aria-labelledby="pr-h">
+  <div class="band split">
+    <div>
+      <div class="eyebrow">07 / Local-first</div>
+      <h2 id="pr-h" class="h-section-sm" data-rv="claim">
+        <span class="ln"><span>Your code stays</span></span>
+        <span class="ln"><span>your code.</span></span>
+      </h2>
+      <p class="lead" data-rv="card" data-i="0" style="max-width:46ch">There is no telemetry. Not anonymous, not aggregate, not opt-out. Nothing reports what you ran, where you ran it, or that you installed it.</p>
+      <div class="paper-list" data-rv="card" data-i="1">
+        <div><i></i>No account required, ever, including for the free plan.</div>
+        <div><i></i>The graph and every artefact live in your repository.</div>
+        <div><i></i>Zero runtime dependencies. Nothing in the supply chain but Python.</div>
+        <div><i></i>Feedback writes a file on your machine; you decide whether to send it.</div>
+        <div><i></i>Hard gates, if you want them, live in the CI your team controls.</div>
+      </div>
+    </div>
+    <div data-rv="card" data-i="2">
+      <div class="term" data-term>
+        <div class="l dim"># check it yourself; CI enforces this on every push</div>
+        <div class="l cmd">grep -rnE '(urlopen|requests\.|httpx\.|socket\.socket)' src/</div>
+        <div class="l"> </div>
+        <div class="l dim"># exactly two commands open a socket, both by your hand:</div>
+        <div class="l ok">edify upgrade</div>
+        <div class="l ok">edify self update</div>
+      </div>
+      <div class="src"><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/privacy.md" target="_blank" rel="noopener">docs/privacy.md</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="pc-h">
+  <div class="eyebrow">08 / Pricing</div>
+  <h2 id="pc-h" class="h-section w24" data-rv="claim">
+    <span class="ln"><span>Free is the full product.</span></span>
+    <span class="ln"><span class="blue">Pro is for big repos.</span></span>
+  </h2>
+  <div class="g3 mt-34">
+    <div class="ed-card" data-rv="card" data-i="0">
+      <div class="top"><div class="label">No account</div><div class="name">Free</div><div class="price"><b>$0</b><span>forever</span></div></div>
+      <div class="lines">
+        <div class="li"><i class="sq"></i><span>Every command, every graph query, every check</span></div>
+        <div class="li"><i class="sq"></i><span>Graphs up to 25,000 nodes (roughly 200 to 300k lines)</span></div>
+        <div class="li"><i class="sq"></i><span>Three projects on one machine</span></div>
+      </div>
+      <div class="bot"><a class="btn btn-line" href="docs.html#install">Install EDIFY</a></div>
+    </div>
+    <div class="ed-card feature" data-rv="card" data-i="1">
+      <div class="top"><div class="label">For large codebases</div><div class="name">Pro</div><div class="price"><b>$20</b><span>usd / user / month</span></div></div>
+      <div class="lines">
+        <div class="li"><i class="sq"></i><span>Unlimited graph size and projects</span></div>
+        <div class="li"><i class="sq"></i><span><code class="c">edify upgrade</code>: new curated library entries</span></div>
+        <div class="li"><i class="sq"></i><span>Unlimited servers in the registry</span></div>
+      </div>
+      <div class="bot"><a class="btn btn-fill" href="pricing.html">See Pro</a></div>
+    </div>
+    <div class="ed-card" data-rv="card" data-i="2">
+      <div class="top"><div class="label">When you need seats</div><div class="name">Team</div><div class="price"><b>Talk to us</b></div></div>
+      <div class="lines">
+        <div class="li"><i class="sq"></i><span>Everything in Pro, on one licence</span></div>
+        <div class="li"><i class="sq"></i><span>More than one seat</span></div>
+        <div class="li no"><i class="sq off"></i><span>Only when a real team needs it</span></div>
+      </div>
+      <div class="bot"><a class="btn btn-line" href="https://github.com/EDIFY-agents/edify_public/discussions" target="_blank" rel="noopener">Start a discussion <span class="m">&#8599;</span></a></div>
+    </div>
+  </div>
+  <div class="src">The licence is a signed token verified locally. No activation server, no phone-home.</div>
+</section>
+
+<section class="cta-band" aria-labelledby="c-h">
+  <img src="assets/img/plates/P5-evidence.jpg" alt="" loading="lazy">
+  <div class="band split end">
+    <div>
+      <div class="eyebrow">09 / Try it</div>
+      <h2 id="c-h" class="h-section w22" data-rv="claim">
+        <span class="ln"><span>Run EDIFY on</span></span>
+        <span class="ln"><span class="blue">one real task.</span></span>
+      </h2>
+      <p class="body" data-rv="card" data-i="0">Install it, point it at a repository you actually ship, and run one change through the five commands. Then tell us what broke.</p>
+    </div>
+    <div data-rv="card" data-i="1">
+      <div class="cmdline"><code>pipx install edify-cli &amp;&amp; edify init</code><button class="copy" data-copy="pipx install edify-cli &amp;&amp; edify init">copy</button></div>
+      <div class="btn-row mt-18">
+        <a class="btn btn-fill" href="docs.html">Read the quickstart <span class="m">&#8594;</span></a>
+        <a class="btn btn-line" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">View on GitHub <span class="m">&#8599;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" aria-labelledby="f-h">
+  <div class="eyebrow quiet">FAQ</div>
+  <h2 id="f-h" class="h-section-sm w22">The questions people ask first.</h2>
+  <div class="faq">
+    <details><summary><span class="id">Q1</span><span>Is this another coding agent?</span><span class="pm">+</span></summary><div class="ans"><p>No. EDIFY does not host a model, wrap an agent runtime, or route between providers. It gives the agent you already use better context, an explicit plan, and independent verification. Cancel your agent subscription and EDIFY does nothing at all.</p></div></details>
+    <details><summary><span class="id">Q2</span><span>How is it different from Spec Kit?</span><span class="pm">+</span></summary><div class="ans"><p>Spec Kit is the closest free alternative and a good tool. The differences: a codebase graph extracted mechanically, never by a model; verification-first builds, with failing tests before core logic and a /verify session that wrote no code; and agent-agnostic by construction.</p><p>The honest answer to "which is better" is the benchmark, which has not finished running.</p></div></details>
+    <details><summary><span class="id">Q3</span><span>Does it send my code anywhere?</span><span class="pm">+</span></summary><div class="ans"><p>No. There is no telemetry of any kind. Only <code class="c">edify upgrade</code> and <code class="c">edify self update</code> open a socket, both by your explicit action. Your agent still talks to its own vendor; EDIFY is not in that path.</p></div></details>
+    <details><summary><span class="id">Q4</span><span>Is it worth it for a small project?</span><span class="pm">+</span></summary><div class="ans"><p>No, and we would rather say so. A frontier model in auto mode is already excellent on a small codebase. The value starts where the repository stops fitting in the context window.</p></div></details>
+    <details><summary><span class="id">Q5</span><span>Does it block bad changes?</span><span class="pm">+</span></summary><div class="ans"><p>Not by itself, and that is deliberate. <code class="c">edify check</code> prints; you or your CI decide what it means. <code class="c">--exit-code</code> is how you build a gate you own.</p></div></details>
+    <details><summary><span class="id">Q6</span><span>Is it open source?</span><span class="pm">+</span></summary><div class="ans"><p>It is source-available under the Functional Source License (FSL-1.1-Apache-2.0), free for any use except building a competing product. Every released version becomes Apache 2.0 two years after release.</p></div></details>
+  </div>
+  <div class="src"><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/faq.md" target="_blank" rel="noopener">docs/faq.md</a> · <a href="https://github.com/EDIFY-agents/edify_public/discussions" target="_blank" rel="noopener">ask in Discussions</a></div>
+</section>
+</main>
+<footer class="site-footer">
+  <div class="foot-top">
+    <div>
+      <div class="foot-brand">
+        <svg viewBox="0 0 100 100" fill="none" aria-hidden="true"><path d="M6 28 L44 6 L66 94 L30 74 L94 52 Z" stroke="#E8ECF2" stroke-width="10" stroke-linejoin="miter" stroke-miterlimit="6"></path><path d="M50.5 32 L54.9 49.4 M56.4 55.5 L60.7 72.9" stroke="#07090C" stroke-width="16"></path><path d="M44 6 L66 94" stroke="#E8ECF2" stroke-width="10"></path></svg>
+        <span>EDIFY</span>
+      </div>
+      <p class="foot-tag">The reliability layer for AI coding agents working on large, real-world codebases.</p>
+      <div class="btn-row" style="margin-top:26px">
+        <a class="btn btn-fill btn-sm" href="docs.html#install">Install EDIFY <span class="m">&#8594;</span></a>
+        <a class="btn btn-line btn-sm" href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">View on GitHub <span class="m">&#8599;</span></a>
+      </div>
+    </div>
+    <div class="foot-cols">
+      <div><h4>Product</h4><a href="how-it-works.html">How it works</a><a href="benchmarks.html">Benchmarks</a><a href="pricing.html">Pricing</a><a href="about.html">About</a></div>
+      <div><h4>Docs</h4><a href="docs.html">Quickstart</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/cli.md" target="_blank" rel="noopener">CLI reference</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/privacy.md" target="_blank" rel="noopener">Privacy</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/docs/faq.md" target="_blank" rel="noopener">FAQ</a></div>
+      <div><h4>GitHub</h4><a href="https://github.com/EDIFY-agents/edify_public" target="_blank" rel="noopener">Repository</a><a href="https://github.com/EDIFY-agents/edify_public/discussions" target="_blank" rel="noopener">Discussions</a><a href="https://github.com/EDIFY-agents/edify_public/issues" target="_blank" rel="noopener">Issues</a><a href="https://github.com/EDIFY-agents/edify_public/blob/main/CHANGELOG.md" target="_blank" rel="noopener">Changelog</a></div>
+    </div>
+  </div>
+  <div class="foot-art" data-field-grid aria-hidden="true">
+    <div class="boxes">
+      <div style="left:3.2%;top:22%;width:14%;height:56%"></div>
+      <div style="left:3.2%;top:44%;width:23%;height:12%"></div>
+      <div style="left:3.2%;top:70%;width:23%;height:12%"></div>
+      <div style="left:47%;top:22%;width:11%;height:56%"></div>
+      <div style="left:56%;top:44%;width:15%;height:12%"></div>
+      <div style="left:70%;top:22%;width:1px;height:56%;border:none;background:rgba(232,236,242,0.055)"></div>
+    </div>
+    <div class="foot-word" data-rv="media" data-i="0"><span>EDIFY</span></div>
+  </div>
+  <div class="foot-line"><span>EDIFY / local-first / no telemetry / files, not conversations</span><span><a href="https://github.com/EDIFY-agents/edify_public/blob/main/LICENSE" target="_blank" rel="noopener">FSL-1.1-Apache-2.0</a> · <a href="https://github.com/EDIFY-agents/edify_public/blob/main/TRADEMARK.md" target="_blank" rel="noopener">Trademark</a> · <a href="https://github.com/EDIFY-agents/edify_public/blob/main/SECURITY.md" target="_blank" rel="noopener">Security</a></span></div>
+</footer>
+</body>
+</html>
