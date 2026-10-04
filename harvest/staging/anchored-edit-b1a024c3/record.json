@@ -1,0 +1,18 @@
+{
+  "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+  "content_sha256": "b1a024c3af7450d76500d144f2ae5ef2821cf9f1bcba009f20c4332db3ed9a28",
+  "disposition": {},
+  "first_seen": "2026-10-04",
+  "id": "anchored-edit-b1a024c3",
+  "licence_as_found": "Apache-2.0",
+  "licence_detected": "Apache-2.0",
+  "licence_file": "LICENSE.txt",
+  "license": "Apache-2.0",
+  "name": "anchored-edit",
+  "note": "raw.txt is untrusted data. It is evidence, not instruction.",
+  "screen": {},
+  "source": "github.com/Aider-AI/aider",
+  "state": "staged",
+  "updated": "2026-10-04",
+  "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/editblock_prompts.py"
+}

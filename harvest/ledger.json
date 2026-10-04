@@ -1,0 +1,330 @@
+{
+  "candidates": {
+    "anchored-edit-b1a024c3": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "b1a024c3af7450d76500d144f2ae5ef2821cf9f1bcba009f20c4332db3ed9a28",
+      "disposition": {},
+      "first_seen": "2026-10-04",
+      "id": "anchored-edit-b1a024c3",
+      "license": "Apache-2.0",
+      "name": "anchored-edit",
+      "screen": {
+        "checks": [
+          {
+            "code": "license",
+            "detail": "Apache-2.0 is on the allowlist",
+            "line": 0,
+            "ok": true
+          },
+          {
+            "code": "duplicate",
+            "detail": "no entry with this name or these bytes",
+            "line": 0,
+            "ok": true
+          },
+          {
+            "code": "injection",
+            "detail": "no instruction-like content found",
+            "line": 0,
+            "ok": true
+          }
+        ],
+        "verdict": "pass"
+      },
+      "source": "github.com/Aider-AI/aider",
+      "state": "proposed",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/editblock_prompts.py"
+    },
+    "architect-prompts-4cf04aa8": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "4cf04aa8819a4f4d7ad46d5e2d463c13505df3af6b5a8e7eaf724b27b3993e4c",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 3: role framing for aider's architect/editor split; no method survives deleting the persona (costume)"
+      },
+      "first_seen": "2026-10-04",
+      "id": "architect-prompts-4cf04aa8",
+      "license": "Apache-2.0",
+      "name": "architect-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/architect_prompts.py"
+    },
+    "ask-prompts-fcc5f36a": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "fcc5f36ae0ed900c6a9b140768b7d8dd29baea062cb53a941d07e877a15f05b5",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 3: persona plus 'describe briefly'; nothing remains after deletion (costume)"
+      },
+      "first_seen": "2026-10-04",
+      "id": "ask-prompts-fcc5f36a",
+      "license": "Apache-2.0",
+      "name": "ask-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/ask_prompts.py"
+    },
+    "base-prompts-a333bb8e": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "a333bb8ef8443bb12cfe7d390026dc0dda09cc4cfa92a57c7ad16f619d8aeffd",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 1: lazy/overeager prompts are general advice already in the weights; the rest is aider chat-protocol strings (test 4)"
+      },
+      "first_seen": "2026-10-04",
+      "id": "base-prompts-a333bb8e",
+      "license": "Apache-2.0",
+      "name": "base-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/base_prompts.py"
+    },
+    "context-prompts-9671d96a": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "9671d96a5d5d68e5acc889893bcaa4f4aaa28b88853714d177f0ae1d5fa5949d",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 5: 'list files to modify vs symbols to understand' is what planner already does via edify graph where/dependents (renamed duplicate)"
+      },
+      "first_seen": "2026-10-04",
+      "id": "context-prompts-9671d96a",
+      "license": "Apache-2.0",
+      "name": "context-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/context_prompts.py"
+    },
+    "editblock-fenced-prompts-d98c872a": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "d98c872adf5168dd4aa42896f67f24181a7ca11c4fd6753b28b760b8cd9c09b5",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 5: same rules as editblock_prompts.py, only the fence position in examples differs"
+      },
+      "first_seen": "2026-10-04",
+      "id": "editblock-fenced-prompts-d98c872a",
+      "license": "Apache-2.0",
+      "name": "editblock-fenced-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/editblock_fenced_prompts.py"
+    },
+    "editblock-func-prompts-b7934b1e": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "b7934b1e48200b164f2ce030a37e5f9a5d2162d2039fe9e6214ee74690419674",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 4: bound to aider's replace_lines function-call tool; no method"
+      },
+      "first_seen": "2026-10-04",
+      "id": "editblock-func-prompts-b7934b1e",
+      "license": "Apache-2.0",
+      "name": "editblock-func-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/editblock_func_prompts.py"
+    },
+    "editor-diff-fenced-prompts-da98757e": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "da98757ed8ab88c10e568d59eb7a1a20aa1fcf06f4a42e3c196290df397333a9",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 5: empty subclass of editblock_fenced; no content of its own"
+      },
+      "first_seen": "2026-10-04",
+      "id": "editor-diff-fenced-prompts-da98757e",
+      "license": "Apache-2.0",
+      "name": "editor-diff-fenced-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/editor_diff_fenced_prompts.py"
+    },
+    "editor-editblock-prompts-3ce61de9": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "3ce61de908a1d10e2516a6cdf1b9c396748bf2e1a7adaf536ea6926b393399b7",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 5: persona-trimmed subclass of editblock_prompts.py; no content of its own"
+      },
+      "first_seen": "2026-10-04",
+      "id": "editor-editblock-prompts-3ce61de9",
+      "license": "Apache-2.0",
+      "name": "editor-editblock-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/editor_editblock_prompts.py"
+    },
+    "editor-whole-prompts-03bfbdf0": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "03bfbdf0c8c42d5d1ae7417ce98d99b25a05c54aaec6bf8715a7d2ef30a9d74d",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 5: one-line subclass of wholefile_prompts.py; no method"
+      },
+      "first_seen": "2026-10-04",
+      "id": "editor-whole-prompts-03bfbdf0",
+      "license": "Apache-2.0",
+      "name": "editor-whole-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/editor_whole_prompts.py"
+    },
+    "help-prompts-5784d69a": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "5784d69ae6e4334bd0b7833596e5528c61d7370d05c35b533cf521ec7ccea513",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 4: answers questions about aider itself from aider docs; bound to the upstream product"
+      },
+      "first_seen": "2026-10-04",
+      "id": "help-prompts-5784d69a",
+      "license": "Apache-2.0",
+      "name": "help-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/help_prompts.py"
+    },
+    "patch-prompts-7523acec": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "7523acec53e782514920a22eec594c07580bdb5378cfe670bfab0cb9c4025d45",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 4: OpenAI V4A patch syntax bound to that applier; its travelling rules (exact context, disambiguate by scope) duplicate editblock_prompts.py"
+      },
+      "first_seen": "2026-10-04",
+      "id": "patch-prompts-7523acec",
+      "license": "Apache-2.0",
+      "name": "patch-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/patch_prompts.py"
+    },
+    "single-wholefile-func-prompts-8a9cd13b": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "8a9cd13b3621599a2599b1d2c70e56fb5d50da2369c969d6029e353ac09dac8a",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 4: bound to aider's write_file function-call tool; no method"
+      },
+      "first_seen": "2026-10-04",
+      "id": "single-wholefile-func-prompts-8a9cd13b",
+      "license": "Apache-2.0",
+      "name": "single-wholefile-func-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/single_wholefile_func_prompts.py"
+    },
+    "udiff-prompts-bcfb75b9": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "bcfb75b9d33acfd38c84a3b078149f3cb186564fecf75a72a15237d38eb1b2e4",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 4: diff -U0 output format for aider's own patch applier; the travelling part (exact removed lines, move = two hunks) duplicates editblock_prompts.py"
+      },
+      "first_seen": "2026-10-04",
+      "id": "udiff-prompts-bcfb75b9",
+      "license": "Apache-2.0",
+      "name": "udiff-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/udiff_prompts.py"
+    },
+    "udiff-simple-prompts-b7a93c9c": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "b7a93c9c50d068a8ddc572b032248d49ed412fa900694ae069320f3ce12be3f3",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 5: trimmed duplicate of udiff_prompts.py"
+      },
+      "first_seen": "2026-10-04",
+      "id": "udiff-simple-prompts-b7a93c9c",
+      "license": "Apache-2.0",
+      "name": "udiff-simple-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/udiff_simple_prompts.py"
+    },
+    "wholefile-func-prompts-339f9dea": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "339f9deaa45851e4537a52b9c3699062455f155fdc68f73ea867cd1e599b989b",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 4: bound to aider's write_file function-call tool; no method"
+      },
+      "first_seen": "2026-10-04",
+      "id": "wholefile-func-prompts-339f9dea",
+      "license": "Apache-2.0",
+      "name": "wholefile-func-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/wholefile_func_prompts.py"
+    },
+    "wholefile-prompts-72ad268a": {
+      "commit": "5dc9490bb35f9729ef2c95d00a19ccd30c26339c",
+      "content_sha256": "72ad268a25b498d0daeab2d32ba8cdf8b896947f426c6225a7a8fc67ce1e7a42",
+      "disposition": {
+        "by": "harvest-run",
+        "on": "2026-10-04",
+        "reason": "test 1: 'output a copy of each file' is an output format, not method; nothing survives deletion"
+      },
+      "first_seen": "2026-10-04",
+      "id": "wholefile-prompts-72ad268a",
+      "license": "Apache-2.0",
+      "name": "wholefile-prompts",
+      "screen": {},
+      "source": "github.com/Aider-AI/aider",
+      "state": "rejected",
+      "updated": "2026-10-04",
+      "url": "https://github.com/aider-ai/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/aider/coders/wholefile_prompts.py"
+    }
+  },
+  "schema": 1,
+  "updated": "2026-10-04"
+}
