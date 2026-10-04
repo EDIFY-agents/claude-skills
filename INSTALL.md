@@ -16,7 +16,7 @@ it installs one command, `edify`.
 ```bash
 pip install edify-agents-cli
 
-edify version            # edify 0.2.0
+edify version            # edify 0.2.1
 ```
 
 `pip` installs into whichever Python environment it belongs to. Inside a virtual
@@ -244,8 +244,15 @@ activation server and no phone-home, so a licence works on an air-gapped machine
 keeps working if we are down.
 
 `EDIFY_LICENSE` carries a token in CI without writing a file. `EDIFY_LICENSE_PUBKEY`
-points verification at a self-hosted issuer. `EDIFY_HOME` moves the licence and the
-feedback file together — which is also how a test isolates both.
+adds a verifying key, for testing an issuer; it never replaces the keys edify ships, and
+`edify license status` says which key verified a licence. `EDIFY_HOME` moves the licence
+and the feedback file together — which is also how a test isolates both.
+
+`edify license status` shows the licence ID. Quote it, not the token, when you write to
+us. A team licence may be bound to one repository by its root commit; in CI, check out
+with full history (`fetch-depth: 0`) so the root commit is visible. A licence that leaks
+can be revoked: the next release carries its ID, and it stops working when that release
+is installed.
 
 ## Uninstalling
 

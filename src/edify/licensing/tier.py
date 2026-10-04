@@ -17,7 +17,8 @@ package.
 
 `pro` and `enterprise` are retired. A token that still names one of them verifies,
 and then resolves to the free plan with a stated reason, because a silent
-downgrade is worse than a stated one.
+downgrade is worse than a stated one. So does a token whose licence ID is on a
+signed revocation list this release carries (`revocation`, REQ-54).
 """
 
 from __future__ import annotations
@@ -26,11 +27,16 @@ import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from ..distribution import CONTACT
 from ..errors import TierRequired
 from ..paths import user_config_dir
+from . import revocation
 from .token import License, Verdict, parse
 
 FREE_MCP_ENTRIES = 1
+
+#: How far ahead `status` and `doctor` warn that a licence is ending (Q-15).
+EXPIRY_WARNING_DAYS = 30
 
 PLANS = ("free", "team", "partner")
 
@@ -79,6 +85,16 @@ class Entitlement:
             raise TierRequired(FEATURE_NAMES.get(feature, feature))
 
     @property
+    def warning(self) -> str:
+        """A licence that works today and is ending soon. Empty otherwise."""
+        lic = self.license
+        if not self.paid or lic is None or not lic.expires_at:
+            return ""
+        if lic.days_left <= EXPIRY_WARNING_DAYS:
+            return f"the licence ends in {lic.days_left} days — ask for a renewal: {CONTACT}"
+        return ""
+
+    @property
     def node_cap(self) -> int | None:
         """Always `None`. Kept so that `--json` readers get `null`, never a `KeyError`."""
         return None
@@ -97,6 +113,7 @@ class Entitlement:
             "plan": self.plan,
             "source": self.source,
             "problem": self.problem,
+            "warning": self.warning,
             "features": sorted(self.features),
             "node_cap": self.node_cap,
             "mcp_cap": self.mcp_cap,
@@ -137,6 +154,14 @@ def current() -> Entitlement:
         )
 
     lic = verdict.license
+    if lic.id in revocation.revoked_ids():
+        return Entitlement(
+            plan="free",
+            license=lic,
+            source=source,
+            problem=f"licence {lic.id} was revoked — ask for a new one: {CONTACT}",
+            features=ENTITLEMENTS["free"],
+        )
     if lic.plan in RETIRED_PLANS:
         return Entitlement(
             plan="free",

@@ -7,6 +7,30 @@ Two contract versions move independently of the CLI version and are recorded in
 `.edify/graph/meta` and `edify/manifest.md`: `graph-schema` (bumping it rebuilds an
 existing graph rather than misreading it) and `index-schema`.
 
+## 0.2.1
+
+- **Licences carry the team fields.** A team or partner token names its client, its admin
+  handles, an optional repository binding (the root commit) and its signing key (`kid`).
+  Every field is optional, so tokens already issued keep working.
+- **Licence ID.** Every licence has one, derived from its signed bytes, shown by
+  `edify license status` and in `--json` as `license.id`.
+- **Revocation, offline.** A release can carry a signed list of revoked licence IDs
+  (`edify/licensing/revoked.tsv`). A revoked licence runs the public edition and says so;
+  `activate` refuses it. Nothing is fetched.
+- **Key rotation.** Several licence keys can ship at once, selected by the token's `kid`.
+  `EDIFY_LICENSE_PUBKEY` now adds a key rather than replacing the shipped one.
+- `license status` shows the client, admins, licence ID, verifying key and whether a bound
+  licence matches this repository. `status` and `doctor` warn 30 days before expiry
+  (was 15).
+- `edify check` understands milestone-scoped task lists. With `milestone:` in the
+  frontmatter, a `deferred` coverage row excuses the assertions it owns (listed as notes,
+  not errors), and a delete by a task marked `Status — done` no longer counts as a
+  missing file. `deferred` without a milestone is an error.
+- Fixed: `edify license activate <token>` crashed with "File name too long" when the
+  token, pasted on the command line, was longer than a filename may be.
+- Fixed: a validly signed token with a non-numeric `seats`, or a payload that is not an
+  object, crashed licence resolution instead of being refused.
+
 ## 0.2.0
 
 - **Renamed** on PyPI from `edify-cli`, a name that belongs to another project, to

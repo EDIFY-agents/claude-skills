@@ -7,7 +7,7 @@ queries the graph, resolves skills, and checks formats.
 It is not the agent runtime and it never wraps a model.
 """
 
-__version__ = "0.2.0"
+__version__ = "0.2.1"
 
 # The on-disk contract version for `.edify/graph/`. Bumping it means an existing
 # graph is rebuilt rather than misread.

@@ -168,3 +168,209 @@ def test_a_token_signed_with_the_zero_seed_no_longer_verifies(
     verdict = parse(forged)
     assert not verdict.valid
     assert "signature" in verdict.reason
+
+
+# -- team and partner licences at scale -------------------------------------
+# The fields a team licence carries, the licence ID, key rotation and the signed
+# revocation list. Every token issued before these existed must keep working.
+
+
+def _payload_bytes(value: str) -> bytes:
+    return token_mod._b64decode(value.split(".")[1])
+
+
+def test_a_partner_licence_carries_its_client_seats_admins_and_expiry(keypair: bytes) -> None:
+    """A-88: seats=25, expiry 2027-09-01 and custom features parse to exactly those."""
+    exp = 1819843199  # 2027-09-01T23:59:59Z
+    value = issue(
+        {"sub": "uoft-lab", "client": "U of T Design Lab", "email": "lab@utoronto.ca",
+         "plan": "partner", "seats": 25, "admins": ["ana", "bo"], "iat": 0, "exp": exp,
+         "features": ["mcp.multi"]},
+        keypair,
+    )
+    lic = parse(value).license
+    assert lic is not None
+    assert (lic.plan, lic.seats, lic.expires_at) == ("partner", 25, exp)
+    assert lic.client == "U of T Design Lab"
+    assert lic.admins == ["ana", "bo"]
+    assert lic.bind == ""
+    assert lic.as_dict()["admins"] == ["ana", "bo"]
+
+
+def test_the_licence_id_is_derived_from_the_signed_bytes(keypair: bytes) -> None:
+    """No field needed, so a token issued before the ID existed has one too."""
+    value = issue({"sub": "old", "plan": "team", "seats": 3, "iat": 0, "exp": 0}, keypair)
+    lic = parse(value).license
+    assert lic is not None
+    assert lic.id == token_mod.licence_id(_payload_bytes(value))
+    assert len(lic.id) == 16
+    assert lic.id != parse(issue({"sub": "old", "plan": "team", "seats": 4, "iat": 0, "exp": 0}, keypair)).license.id
+
+
+def test_a_token_names_the_key_that_verified_it(keypair: bytes) -> None:
+    lic = parse(issue({"plan": "team", "iat": 0, "exp": 0}, keypair)).license
+    assert lic is not None and lic.key == "override" and lic.kid == 0
+
+
+def test_a_rotated_key_verifies_tokens_that_name_it(monkeypatch: pytest.MonkeyPatch) -> None:
+    old, new = secrets.token_bytes(32), secrets.token_bytes(32)
+    monkeypatch.delenv("EDIFY_LICENSE_PUBKEY", raising=False)
+    monkeypatch.setattr(token_mod, "PUBLIC_KEYS", (
+        binascii.hexlify(ed25519.public_key(old)).decode(),
+        binascii.hexlify(ed25519.public_key(new)).decode(),
+    ))
+    before = parse(issue({"plan": "team", "iat": 0, "exp": 0}, old)).license
+    after = parse(issue({"plan": "team", "iat": 0, "exp": 0, "kid": 1}, new)).license
+    assert before is not None and before.key == "k0"
+    assert after is not None and after.key == "k1"
+    # A token claiming key 0 but signed by key 1 is not accepted.
+    assert not parse(issue({"plan": "team", "iat": 0, "exp": 0}, new)).valid
+
+
+def test_a_token_from_a_newer_key_says_to_upgrade(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv("EDIFY_LICENSE_PUBKEY", raising=False)
+    verdict = parse(issue({"plan": "team", "iat": 0, "exp": 0, "kid": 7}, secrets.token_bytes(32)))
+    assert not verdict.valid
+    assert "upgrade" in verdict.reason
+
+
+def test_the_override_key_adds_to_the_shipped_key_and_never_replaces_it(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    shipped, other = secrets.token_bytes(32), secrets.token_bytes(32)
+    monkeypatch.setattr(token_mod, "PUBLIC_KEYS", (binascii.hexlify(ed25519.public_key(shipped)).decode(),))
+    monkeypatch.setenv("EDIFY_LICENSE_PUBKEY", binascii.hexlify(ed25519.public_key(other)).decode())
+    lic = parse(issue({"plan": "team", "iat": 0, "exp": 0}, shipped)).license
+    assert lic is not None and lic.key == "k0"
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"plan": "team", "seats": "many"},
+        {"plan": "team", "seats": -3},
+        {"plan": "team", "admins": "ana"},
+        {"plan": "team", "exp": "soon"},
+        {"plan": "team", "kid": "zero"},
+    ],
+)
+def test_a_signed_but_malformed_payload_is_refused_not_crashed(keypair: bytes, payload: dict) -> None:
+    verdict = parse(issue(payload, keypair))
+    assert not verdict.valid
+    assert verdict.reason
+
+
+def test_a_payload_that_is_not_an_object_is_refused(keypair: bytes) -> None:
+    from edify.licensing.ed25519 import sign
+
+    body = b'["team"]'
+    value = f"edify1.{token_mod._b64encode(body)}.{token_mod._b64encode(sign(body, keypair))}"
+    verdict = parse(value)
+    assert not verdict.valid and "object" in verdict.reason
+
+
+def test_an_oversized_token_is_refused_before_any_work() -> None:
+    assert "too long" in parse("edify1." + "A" * 20000 + ".x").reason
+
+
+def test_binding_matches_the_root_commit_full_or_abbreviated(keypair: bytes) -> None:
+    root = "4acd6922cb98f6522450fdd50598a32f8b583b85"
+    lic = parse(issue({"plan": "team", "bind": root[:12], "iat": 0, "exp": 0}, keypair)).license
+    assert lic is not None
+    assert lic.bound_to([root])
+    assert lic.bound_to(["0" * 40, root])
+    assert not lic.bound_to(["0" * 40])
+    assert not lic.bound_to([])
+    unbound = parse(issue({"plan": "partner", "iat": 0, "exp": 0}, keypair)).license
+    assert unbound is not None and unbound.bound_to([])
+
+
+def test_the_root_commit_of_a_real_repository(tmp_path) -> None:
+    import subprocess
+
+    from edify.licensing.binding import root_commits
+
+    roots, problem = root_commits(tmp_path)
+    assert roots == [] and problem
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True)
+    subprocess.run(["git", "-C", str(tmp_path), "-c", "user.name=t", "-c", "user.email=t@t",
+                    "commit", "-q", "--allow-empty", "-m", "root"], check=True)
+    roots, problem = root_commits(tmp_path)
+    assert problem == "" and len(roots) == 1 and len(roots[0]) == 40
+
+
+def test_a_licence_ending_within_thirty_days_warns(keypair: bytes) -> None:
+    tier.save(issue({"plan": "team", "iat": 0, "exp": int(time.time()) + 10 * 86400}, keypair))
+    ent = tier.current()
+    assert ent.plan == "team"
+    assert "renewal" in ent.warning
+    tier.save(issue({"plan": "team", "iat": 0, "exp": int(time.time()) + 90 * 86400}, keypair))
+    assert tier.current().warning == ""
+
+
+# -- the revocation list ----------------------------------------------------
+
+
+@pytest.fixture
+def revocations(tmp_path, monkeypatch: pytest.MonkeyPatch):
+    from edify.licensing import revocation
+
+    path = tmp_path / "revoked.tsv"
+    monkeypatch.setattr(revocation, "EMBEDDED", path)
+    monkeypatch.setattr(revocation, "_registered", [])
+    return path
+
+
+def test_a_revoked_licence_resolves_to_free_and_says_so(keypair: bytes, revocations) -> None:
+    from edify.licensing import revocation
+
+    value = issue({"plan": "team", "seats": 5, "iat": 0, "exp": 0}, keypair)
+    tier.save(value)
+    assert tier.current().plan == "team"
+
+    lid = parse(value).license.id
+    revocations.write_text(revocation.write({lid}, keypair), encoding="utf-8")
+    ent = tier.current()
+    assert ent.plan == "free"
+    assert "revoked" in ent.problem and lid in ent.problem
+    assert not ent.allows("team")
+
+
+def test_an_edited_revocation_list_is_ignored_and_reported(keypair: bytes, revocations) -> None:
+    from edify.licensing import revocation
+
+    value = issue({"plan": "team", "iat": 0, "exp": 0}, keypair)
+    lid = parse(value).license.id
+    signed = revocation.write({lid}, keypair)
+    revocations.write_text(signed.replace(lid, "0" * 16), encoding="utf-8")
+    tier.save(value)
+    assert tier.current().plan == "team"
+    loaded = revocation.load()
+    assert loaded.ids == frozenset()
+    assert loaded.problems and "signature" in loaded.problems[0]
+
+
+def test_an_unsigned_or_absent_list_revokes_nothing(keypair: bytes, revocations) -> None:
+    from edify.licensing import revocation
+
+    assert revocation.revoked_ids() == frozenset()
+    revocations.write_text("edify-revoked\t1\tkid=0\n0123456789abcdef\n", encoding="utf-8")
+    assert revocation.revoked_ids() == frozenset()
+
+
+def test_the_team_edition_can_register_its_own_list(keypair: bytes, revocations, tmp_path) -> None:
+    from edify.licensing import revocation
+
+    value = issue({"plan": "partner", "iat": 0, "exp": 0}, keypair)
+    extra = tmp_path / "team-revoked.tsv"
+    extra.write_text(revocation.write({parse(value).license.id}, keypair), encoding="utf-8")
+    revocation.register(extra)
+    tier.save(value)
+    assert tier.current().plan == "free"
+
+
+def test_the_revocation_list_refuses_anything_but_licence_ids(keypair: bytes) -> None:
+    from edify.licensing import revocation
+
+    with pytest.raises(ValueError):
+        revocation.write({"acme@example.com"}, keypair)

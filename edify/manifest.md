@@ -2,7 +2,7 @@
 
 What this install is, and what it pins. Read by `edify doctor` and `edify upgrade`.
 
-- edify: 0.2.0
+- edify: 0.2.1
 - library: 0.1.0
 - graph-schema: 1
 - index-schema: 1

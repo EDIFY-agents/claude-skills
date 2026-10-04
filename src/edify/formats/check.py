@@ -326,7 +326,9 @@ def _check_task(
                     hint="a whole-file reference passes any shape check, inflates overlap, and makes the builder open lines it did not need",
                 )
             )
-        if action in ("edit", "delete") and not (layout.root / ref.path).exists():
+        # A done task's delete has already happened: its target is meant to be gone.
+        gone_on_purpose = action == "delete" and task.status == "done"
+        if action in ("edit", "delete") and not gone_on_purpose and not (layout.root / ref.path).exists():
             out.append(
                 Finding(
                     Level.ERROR, rel, ref.line, "task-file-missing",
@@ -406,6 +408,24 @@ def _check_phases(tasks: tasks_format.Tasks) -> list[Finding]:
     return out
 
 
+def _deferred_assertions(tasks: tasks_format.Tasks, spec: spec_format.Spec) -> set[str]:
+    """Assertions this milestone defers: those owned only by deferred requirements,
+    and those a coverage row names in a sentence that says `deferred`.
+
+    Only a milestone-scoped document may defer. An assertion that a live
+    requirement also names is not deferred, unless a row defers it by id.
+    """
+    if not tasks.milestone:
+        return set()
+    deferred_reqs = {r.source.strip().strip("`*") for r in tasks.coverage if r.deferred}
+    owners: dict[str, set[str]] = {}
+    for req in spec.requirements:
+        for aid in req.assertions:
+            owners.setdefault(aid, set()).add(req.id)
+    by_id = {aid for r in tasks.coverage for aid in r.deferred_ids}
+    return by_id | {aid for aid, reqs in owners.items() if reqs and reqs <= deferred_reqs}
+
+
 def _check_coverage(tasks: tasks_format.Tasks, spec: spec_format.Spec | None) -> list[Finding]:
     out: list[Finding] = []
     rel = tasks.rel
@@ -416,6 +436,14 @@ def _check_coverage(tasks: tasks_format.Tasks, spec: spec_format.Spec | None) ->
         return out
 
     for row in tasks.coverage:
+        if row.deferred and not tasks.milestone:
+            out.append(
+                Finding(
+                    Level.ERROR, rel, row.line, "coverage-deferred-no-milestone",
+                    f"{row.source} is `deferred`, and this document tasks no milestone",
+                    hint="add `milestone:` to the frontmatter, or task the requirement here",
+                )
+            )
         if not row.discharged.strip():
             out.append(
                 Finding(
@@ -503,7 +531,16 @@ def _check_phase_two(
 
     if spec is not None and phase_two:
         asserted = {aid for t in phase_two for aid in t.discharges}
+        deferred = _deferred_assertions(tasks, spec)
         for missing in sorted(spec.assertion_ids() - asserted):
+            if missing in deferred:
+                out.append(
+                    Finding(
+                        Level.INFO, rel, 1, "phase2-assertion-deferred",
+                        f"assertion {missing} belongs to a later milestone than {tasks.milestone}",
+                    )
+                )
+                continue
             out.append(
                 Finding(
                     Level.ERROR, rel, 1, "phase2-assertion-untested",

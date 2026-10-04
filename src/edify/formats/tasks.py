@@ -37,6 +37,8 @@ _DISCHARGES = re.compile(r"^\s*Discharges\s+(?P<ids>.+)$", re.IGNORECASE)
 _VERIFICATION = re.compile(r"^\s*Verification\s+(?P<kinds>.+)$", re.IGNORECASE)
 _DEPENDS = re.compile(r"^\s*Depends on\s+(?P<ids>.*?)(?:·|$)", re.IGNORECASE)
 _PARALLEL = re.compile(r"Parallel with\s+(?P<ids>.+)$", re.IGNORECASE)
+#: `Status — **done** 2026-09-28`, written by /build when a task's done-check passes.
+_STATUS = re.compile(r"^\s*Status\s*[—:-]+\s*[*_`]*(?P<status>[A-Za-z-]+)", re.IGNORECASE)
 _RANGE = re.compile(r"^(?P<start>\d+)\s*[-–]\s*(?P<end>\d+)$")
 
 
@@ -81,6 +83,8 @@ class Task:
     steps: list[str] = field(default_factory=list)
     done_when: list[str] = field(default_factory=list)
     files_table_line: int = 0
+    #: Empty until /build records one; `done` once the task's done-check passed.
+    status: str = ""
 
     @property
     def edits(self) -> list[FileRef]:
@@ -112,6 +116,26 @@ class CoverageRow:
     def discharged(self) -> str:
         return " ".join(c for c in self.cells if c.strip())
 
+    @property
+    def deferred(self) -> bool:
+        """Owned by a later milestone: the asserted-by cell says `deferred`."""
+        return bool(self.cells) and "deferred" in self.cells[0].lower()
+
+    @property
+    def deferred_ids(self) -> set[str]:
+        """Assertion ids named in a sentence that says `deferred`.
+
+        A milestone can split a requirement — "T-8. The team half (A-81, A-82) is
+        `deferred`, M2" — and only that sentence defers. "`deferred` M2. A-16 is
+        pulled into M1" defers nothing by id: A-16 is in another sentence.
+        """
+        out: set[str] = set()
+        for cell in self.cells:
+            for sentence in re.split(r"\.\s+", cell):
+                if "deferred" in sentence.lower():
+                    out.update(re.findall(r"\bA-\d+\b", sentence))
+        return out
+
 
 @dataclass
 class Tasks:
@@ -119,6 +143,8 @@ class Tasks:
     feature: str = ""
     status: str = ""
     spec_ref: str = ""
+    #: Set when the document tasks one milestone of a larger spec.
+    milestone: str = ""
     tasks: list[Task] = field(default_factory=list)
     phases: list[Phase] = field(default_factory=list)
     coverage: list[CoverageRow] = field(default_factory=list)
@@ -144,6 +170,7 @@ def parse(path: Path, rel: str | None = None) -> Tasks:
     out.feature = doc.frontmatter.get("feature", "")
     out.status = doc.frontmatter.get("status", "")
     out.spec_ref = doc.frontmatter.get("spec", "")
+    out.milestone = doc.frontmatter.get("milestone", "")
 
     current_phase: int | None = None
     for section in doc.sections:
@@ -205,6 +232,10 @@ def _task(section: Section, heading: re.Match[str], fallback_phase: int | None) 
         m = _VERIFICATION.match(line)
         if m:
             task.verification = _kinds(m.group("kinds"))
+            continue
+        m = _STATUS.match(line)
+        if m and not task.status:
+            task.status = m.group("status").lower()
             continue
         m = _DEPENDS.match(line)
         if m:

@@ -17,24 +17,37 @@ from pathlib import Path
 from ..context import Context
 from ..distribution import CONTACT
 from ..errors import EdifyError
-from ..licensing import tier
-from ..licensing.token import parse
+from ..licensing import revocation, tier
+from ..licensing.binding import root_commits
+from ..licensing.token import License, parse
 from ..ui import MARKS
 
 
 def status(ctx: Context) -> int:
     ent = ctx.entitlement
-    ctx.out.data(ent.as_dict())
+    data = ent.as_dict()
+    binding = _binding(ctx, ent.license) if ent.license else None
+    data["binding"] = binding
+    data["revocations"] = revocation.load().as_dict()
+    ctx.out.data(data)
 
     ctx.out.field("plan", ent.plan)
     if ent.license:
         lic = ent.license
-        ctx.out.field("licensed", f"{lic.email or lic.subject or 'unnamed'} · {lic.seats} seat(s)")
+        who = lic.client or lic.email or lic.subject or "unnamed"
+        ctx.out.field("licensed", f"{who} · {lic.seats} seat(s)")
+        if lic.admins:
+            ctx.out.field("admins", ", ".join(lic.admins))
+        ctx.out.field("licence id", f"{lic.id} · key {lic.key}")
         if lic.expires_at:
             when = time.strftime("%Y-%m-%d", time.gmtime(lic.expires_at))
             ctx.out.field("expires", f"{when} ({lic.days_left} days)")
+        if binding:
+            ctx.out.field("bound to", f"{lic.bind[:12]} · {binding['detail']}")
     if ent.problem:
         ctx.out.warn(f"a licence was found and not accepted: {ent.problem}")
+    if ent.warning:
+        ctx.out.warn(ent.warning)
     ctx.out.field("source", str(ent.source))
     ctx.out.line("")
 
@@ -57,20 +70,55 @@ def status(ctx: Context) -> int:
 
 
 def activate(ctx: Context) -> int:
-    token = ctx.args.token.strip()
-    if Path(token).expanduser().is_file():
-        token = Path(token).expanduser().read_text(encoding="utf-8").strip()
+    token = _token_or_file(ctx.args.token.strip())
 
     verdict = parse(token)
     if not verdict.valid or verdict.license is None:
         raise EdifyError(f"not activated — {verdict.reason}")
 
-    path = tier.save(token)
     lic = verdict.license
+    if lic.id in revocation.revoked_ids():
+        raise EdifyError(f"not activated — licence {lic.id} was revoked")
+
+    path = tier.save(token)
     ctx.out.data({"path": str(path), "license": lic.as_dict()})
-    ctx.out.ok(f"{lic.plan} plan activated for {lic.email or lic.subject or 'this machine'}")
+    ctx.out.ok(f"{lic.plan} plan activated for {lic.client or lic.email or lic.subject or 'this machine'}")
     ctx.out.line(str(path))
+    if lic.plan in tier.RETIRED_PLANS:
+        ctx.out.warn(f"the {lic.plan} plan is retired — this machine runs the public edition; ask for a new token")
+    binding = _binding(ctx, lic)
+    if binding and not binding["matches"]:
+        ctx.out.warn(f"this licence is bound to another repository ({binding['detail']})")
     return 0
+
+
+def _token_or_file(value: str) -> str:
+    """The token itself, or the contents of the file it names.
+
+    A token is checked for first: a team token is longer than a path component may
+    be, and asking the filesystem about it raises rather than answering no.
+    """
+    if value.startswith("edify1."):
+        return value
+    try:
+        path = Path(value).expanduser()
+        if path.is_file():
+            return path.read_text(encoding="utf-8").strip()
+    except OSError:
+        pass
+    return value
+
+
+def _binding(ctx: Context, lic: License) -> dict[str, object] | None:
+    """Whether a bound licence matches the repository this command runs in."""
+    if not lic.bind:
+        return None
+    roots, problem = root_commits(ctx.layout.root)
+    if problem:
+        return {"bind": lic.bind, "matches": False, "detail": problem}
+    matches = lic.bound_to(roots)
+    detail = "this repository" if matches else f"this repository's root is {roots[0][:12]}"
+    return {"bind": lic.bind, "matches": matches, "detail": detail}
 
 
 def deactivate(ctx: Context) -> int:

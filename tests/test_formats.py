@@ -345,3 +345,86 @@ def test_an_invalid_skill_is_reported_and_not_indexed(installed: Path) -> None:
 
     _, skipped = skills_index.build_index(layout)
     assert any("broken.md" in s for s in skipped)
+
+
+# -- milestone-scoped task lists --------------------------------------------
+# A feature too large for one build is tasked a milestone at a time. Its later
+# milestones' requirements are listed in `## Coverage` as `deferred`, so the table
+# is visibly incomplete rather than falsely complete.
+
+DEFERRED_SPEC = GOOD_SPEC.replace(
+    "| REQ-1 | An admin can invite someone by email | A-1, A-2 |",
+    "| REQ-1 | An admin can invite someone by email | A-1, A-2 |\n"
+    "| REQ-2 | An admin can revoke an invitation | A-3 |",
+).replace(
+    "| A-2 | Accepting an expired invite returns 410 | example | new |",
+    "| A-2 | Accepting an expired invite returns 410 | example | new |\n"
+    "| A-3 | A revoked invite returns 410 | example | new |",
+)
+DEFERRED_ROW = "| REQ-2 | An admin can revoke an invitation | `deferred` M2 | `deferred` M2 |\n"
+MILESTONE_TASKS = GOOD_TASKS.replace("phases: 3\n", "milestone: M1\nphases: 3\n").replace(
+    "| CL-1 | The migration has a rollback | — | T-1 |\n",
+    "| CL-1 | The migration has a rollback | — | T-1 |\n" + DEFERRED_ROW,
+)
+
+
+def test_a_milestone_defers_its_later_assertions_with_a_note(repo: Path) -> None:
+    write_feature(repo, spec=DEFERRED_SPEC, tasks=MILESTONE_TASKS)
+    found = codes(repo)
+    assert "phase2-assertion-untested" not in found
+    assert found.get("phase2-assertion-deferred") == Level.INFO
+    assert not [c for c, level in found.items() if level == Level.ERROR]
+
+
+def test_deferred_needs_a_milestone(repo: Path) -> None:
+    tasks = MILESTONE_TASKS.replace("milestone: M1\n", "")
+    write_feature(repo, spec=DEFERRED_SPEC, tasks=tasks)
+    found = codes(repo)
+    assert found.get("coverage-deferred-no-milestone") == Level.ERROR
+    assert found.get("phase2-assertion-untested") == Level.ERROR
+
+
+def test_an_assertion_shared_with_a_live_requirement_is_not_deferred(repo: Path) -> None:
+    spec = DEFERRED_SPEC.replace("| REQ-1 | An admin can invite someone by email | A-1, A-2 |",
+                                 "| REQ-1 | An admin can invite someone by email | A-1, A-2, A-3 |")
+    write_feature(repo, spec=spec, tasks=MILESTONE_TASKS)
+    assert codes(repo).get("phase2-assertion-untested") == Level.ERROR
+
+
+def test_a_done_task_may_have_deleted_its_file(repo: Path) -> None:
+    deleting = GOOD_TASKS.replace("| src/api/members.ts | 1-9 | edit |",
+                                  "| src/api/members.ts | 1-9 | edit |\n| src/api/retired.ts | — | delete |")
+    write_feature(repo, tasks=deleting)
+    assert codes(repo).get("task-file-missing") == Level.ERROR
+
+    done = deleting.replace("Depends on T-1, T-2 · Parallel with —",
+                            "Depends on T-1, T-2 · Parallel with —\nStatus — **done** 2026-08-07")
+    write_feature(repo, tasks=done)
+    assert "task-file-missing" not in codes(repo)
+    assert tasks_format.parse(repo / "specs" / "invitations" / "tasks.md").by_id("T-3").status == "done"
+
+
+def test_a_done_task_still_may_not_edit_a_missing_file(repo: Path) -> None:
+    tasks = GOOD_TASKS.replace("| src/api/members.ts | 1-9 | edit |", "| src/api/gone.ts | 1-9 | edit |").replace(
+        "Depends on T-1, T-2 · Parallel with —", "Depends on T-1, T-2 · Parallel with —\nStatus — **done** 2026-08-07")
+    write_feature(repo, tasks=tasks)
+    assert codes(repo).get("task-file-missing") == Level.ERROR
+
+
+def test_a_milestone_may_defer_some_assertions_of_a_split_requirement(repo: Path) -> None:
+    """Only the sentence that says `deferred` defers the ids in it."""
+    spec = DEFERRED_SPEC.replace("| REQ-2 | An admin can revoke an invitation | A-3 |\n", "").replace(
+        "| REQ-1 | An admin can invite someone by email | A-1, A-2 |",
+        "| REQ-1 | An admin can invite someone by email | A-1, A-2, A-3 |")
+    tasks = MILESTONE_TASKS.replace(DEFERRED_ROW, "").replace(
+        "| REQ-1 | An admin can invite by email | T-2 | T-1, T-3 |",
+        "| REQ-1 | An admin can invite by email | T-2 | T-1, T-3. The revoke half (A-3) is `deferred`, M2 |")
+    write_feature(repo, spec=spec, tasks=tasks)
+    found = codes(repo)
+    assert "phase2-assertion-untested" not in found
+    assert found.get("phase2-assertion-deferred") == Level.INFO
+
+    pulled_in = tasks.replace("T-1, T-3. The revoke half (A-3) is `deferred`, M2",
+                              "`deferred` M2. A-3 is pulled into M1: T-2")
+    write_feature(repo, spec=spec, tasks=pulled_in)
+    assert codes(repo).get("phase2-assertion-untested") == Level.ERROR

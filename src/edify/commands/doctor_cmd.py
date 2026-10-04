@@ -183,7 +183,7 @@ def _license(ctx: Context) -> Check:
     ent = ctx.entitlement
     if ent.problem:
         return Check("license", AMBER, f"running free — {ent.problem}")
-    if ent.paid and ent.license and ent.license.days_left in range(0, 15):
+    if ent.warning and ent.license:
         return Check("license", AMBER, f"{ent.plan} · expires in {ent.license.days_left} days")
 
     if ent.paid:

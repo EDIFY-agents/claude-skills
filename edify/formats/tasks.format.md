@@ -46,6 +46,7 @@ feature: team-invitations
 spec: spec.md
 plan: —                  # plan.md, or — when the feature does not need one
 status: draft            # draft | approved | amended
+milestone: M1            # optional: this document tasks one milestone of the spec
 phases: 8
 tasks: 16
 date: 2026-08-06
@@ -167,6 +168,19 @@ Three legal values in the right-hand columns: task ids, `waived` with a reason o
 the same line, or `proof-only`. An empty cell means the plan is not ready, and the
 check runs **before** a human sees the table.
 
+A fourth, `deferred`, is legal only when the frontmatter names a `milestone:`. A
+spec too large for one build is tasked a milestone at a time, and its later
+requirements stay in this table as `deferred` rows, so the table is visibly
+incomplete rather than falsely complete. An assertion owned only by deferred rows
+needs no phase-2 task here; `edify check` lists it as a note. A row can also defer
+part of a requirement by naming the assertions in the sentence that says
+`deferred` — `T-8. The team half (A-81, A-82) is deferred, M2` — and only that
+sentence defers.
+
+| source | what it is | asserted by | built by |
+|---|---|---|---|
+| REQ-9 | An admin can revoke an invitation | `deferred` M2 | `deferred` M2 |
+
 A row with a builder and no asserter is a requirement nobody wrote a failing test
 for: it will be built, it will look done, and nothing will ever have proved it.
 
@@ -194,6 +208,8 @@ next feature.
 ## What `edify check` reports
 
 A task with no discharge, no steps, or no done-check. A whole-file reference on an
-edit. A file that is not on disk. A phase-2 done-check that asserts tests pass. An
+edit. A file that is not on disk, except a delete by a task whose `Status — done`
+line /build has written, since that file is meant to be gone. A `deferred` row in
+a document with no `milestone:`. A phase-2 done-check that asserts tests pass. An
 assertion with no phase-2 task. An empty coverage cell. A phase with no exit check.
 A dependency on a task that does not exist.
